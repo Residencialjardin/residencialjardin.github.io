@@ -8,389 +8,202 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F2EDE4; --sage: #7B9E82; --sage-lt: #A8C2A8;
+  --stone: #C4B49A; --charcoal: #2A2A2A; --mid: #6B6B6B; --white: #FFFFFF;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
-  :root {
-    --cream:    #F2EDE4;
-    --sage:     #7B9E82;
-    --sage-lt:  #A8C2A8;
-    --stone:    #C4B49A;
-    --charcoal: #2A2A2A;
-    --mid:      #6B6B6B;
-    --white:    #FFFFFF;
-  }
+/* NAV */
+nav { position: fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 60px; transition:background .4s,box-shadow .4s; }
+nav.scrolled { background:rgba(242,237,228,0.95); backdrop-filter:blur(10px); box-shadow:0 2px 20px rgba(0,0,0,.07); }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { text-decoration:none; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--white); font-weight:500; transition:color .2s; }
+nav.scrolled .nav-links a { color:var(--charcoal); }
+.nav-links a:hover { opacity:.7; }
+.nav-cta { background:var(--sage); color:var(--white)!important; padding:9px 24px; border-radius:2px; }
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+.hero { position:relative; height:100vh; min-height:600px; display:flex; align-items:flex-end; overflow:hidden; }
+.hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.08) 100%); }
+.hero-content { position:relative; z-index:2; padding:0 60px 80px; color:var(--white); animation:fadeUp .9s ease both; }
+.hero-eyebrow { font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.75; margin-bottom:16px; }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(50px,7vw,92px); font-weight:300; line-height:1; margin-bottom:14px; }
+.hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.5vw,26px); font-weight:300; font-style:italic; opacity:.8; margin-bottom:40px; }
+.hero-badge { display:inline-block; border:1px solid rgba(255,255,255,.45); padding:9px 22px; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:50px; }
+.hero-logos { display:flex; gap:20px; align-items:center; }
+.hero-logos img { height:32px; object-fit:contain; opacity:.85; }
+.hero-logos .sep { width:1px; height:26px; background:rgba(255,255,255,.3); }
+.hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.55); font-size:10px; letter-spacing:.15em; text-transform:uppercase; animation:fadeIn 1.5s 1s both; }
+.hero-scroll-line { width:1px; height:40px; background:rgba(255,255,255,.4); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    font-size: 15px;
-    line-height: 1.7;
-  }
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity .7s,transform .7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 60px;
-    background: rgba(242,237,228,0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(123,158,130,0.2);
-    transition: box-shadow .3s;
-  }
-  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.07); }
-  .nav-logo img { height: 48px; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    text-decoration: none;
-    font-size: 12px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--charcoal);
-    font-weight: 500; transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--sage); }
-  .nav-cta {
-    background: var(--sage);
-    color: var(--white) !important;
-    padding: 9px 24px; border-radius: 2px;
-  }
-  .nav-cta:hover { background: #6a8d70 !important; }
+/* COMMONS */
+.section-eyebrow { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--sage); margin-bottom:14px; font-weight:500; }
+.section-num { font-family:'Cormorant Garamond',serif; font-size:80px; line-height:1; color:var(--sage-lt); font-weight:300; margin-bottom:-10px; }
+h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4vw,52px); font-weight:300; line-height:1.15; margin-bottom:8px; }
+h2 em { font-style:italic; color:var(--stone); }
+.lead { font-size:14px; color:var(--mid); max-width:640px; margin-bottom:28px; line-height:1.8; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    padding-top: 85px;
-  }
-  .hero-img {
-    background: url('exterior.jpg') center/cover no-repeat;
-    min-height: 80vh;
-  }
-  .hero-text {
-    background: var(--sage);
-    display: flex; flex-direction: column;
-    justify-content: center;
-    padding: 80px 70px;
-    color: var(--white);
-  }
-  .hero-eyebrow {
-    font-size: 11px; letter-spacing: .2em;
-    text-transform: uppercase; opacity: .75;
-    margin-bottom: 20px;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    font-weight: 300; line-height: 1.1;
-    margin-bottom: 8px;
-  }
-  .hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 2.5vw, 30px);
-    font-weight: 300; font-style: italic;
-    opacity: .8; margin-bottom: 40px;
-  }
-  .hero-badge {
-    display: inline-block;
-    border: 1px solid rgba(255,255,255,.4);
-    padding: 10px 22px;
-    font-size: 11px; letter-spacing: .15em;
-    text-transform: uppercase;
-    margin-bottom: 50px; width: fit-content;
-  }
-  .hero-logos { display: flex; gap: 20px; align-items: center; }
-  .hero-logos img {
-    height: 36px;
-    opacity: .85;
-  }
-  .hero-logos .sep { width: 1px; height: 30px; background: rgba(255,255,255,.3); }
+/* INTRO */
+.intro { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; padding:100px 60px; }
+.intro-moodboard { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; height:480px; }
+.mood-a { grid-column:1; grid-row:1/3; background:url('interior3.jpg') center/cover; }
+.mood-b { grid-column:2/4; grid-row:1; background:url('interior1.jpg') center/cover; }
+.mood-sage { background:var(--sage); }
+.mood-cream { background:#D6CEC4; }
 
-  /* SECTION COMMONS */
-  .section-eyebrow {
-    font-size: 11px; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--sage);
-    margin-bottom: 16px; font-weight: 500;
-  }
-  .section-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px; line-height: 1; color: var(--sage-lt);
-    font-weight: 300; margin-bottom: -10px;
-  }
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 300; line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  h2 em { font-style: italic; color: var(--stone); }
-  .lead {
-    font-size: 14px; color: var(--mid);
-    max-width: 640px; margin-bottom: 32px;
-    line-height: 1.8;
-  }
+/* PROMO */
+.promo { display:grid; grid-template-columns:1fr 1fr; min-height:540px; }
+.promo-text { padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+.promo-img { background:url('interior2.jpg') center/cover; }
+.stats-bar { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(123,158,130,.25); margin-top:40px; }
+.stat { padding:28px 0; border-right:1px solid rgba(123,158,130,.25); }
+.stat:last-child { border-right:none; }
+.stat:not(:first-child) { padding-left:28px; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:300; line-height:1; margin-bottom:4px; }
+.stat-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mid); }
 
-  /* INTRO */
-  .intro {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-    padding: 100px 60px;
-  }
-  .intro-moodboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 6px; height: 480px;
-  }
-  .mood-span-col { grid-column: 1; grid-row: 1 / span 2; }
-  .mood-top-right { grid-column: 2 / span 2; grid-row: 1; }
-  .mood-green { background: var(--sage); grid-column: 2; grid-row: 2; }
-  .mood-cream { background: #D6CEC4; grid-column: 3; grid-row: 2; }
+/* GALLERY */
+.gallery { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:320px 320px; gap:4px; }
+.gallery-item { overflow:hidden; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s; display:block; }
+.gallery-item:hover img { transform:scale(1.04); }
+.gallery-item.large { grid-column:span 2; }
 
-  /* VIDEO */
-  .video-section { padding: 0; background: var(--charcoal); }
-  .video-wrapper {
-    position: relative; width: 100%;
-    aspect-ratio: 16/9; max-height: 600px; overflow: hidden;
-  }
-  .video-wrapper iframe { width: 100%; height: 100%; display: block; border: none; }
+/* FEATURES */
+.features { background:var(--charcoal); color:var(--white); padding:100px 60px; }
+.features h2 { color:var(--white); }
+.features h2 em { color:var(--sage-lt); }
+.features-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid rgba(255,255,255,.1); margin-top:60px; }
+.feature-card { padding:40px 32px; border-right:1px solid rgba(255,255,255,.1); }
+.feature-card:last-child { border-right:none; }
+.feature-icon { width:40px; height:40px; margin-bottom:18px; }
+.feature-icon svg { width:100%; height:100%; stroke:var(--sage-lt); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.feature-title { font-size:12px; letter-spacing:.15em; text-transform:uppercase; font-weight:500; color:var(--sage-lt); margin-bottom:10px; }
+.feature-desc { font-size:14px; color:rgba(255,255,255,.55); line-height:1.7; }
 
-  /* PROMO */
-  .promo {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    min-height: 600px; padding: 0;
-  }
-  .promo-text {
-    padding: 80px 60px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .promo-img {
-    background: url('interior2.jpg') center/cover no-repeat;
-  }
-  .promo-stats {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    border-top: 1px solid rgba(123,158,130,.25);
-    margin-top: 40px;
-  }
-  .stat { padding: 28px 0; border-right: 1px solid rgba(123,158,130,.25); }
-  .stat:last-child { border-right: none; }
-  .stat:not(:first-child) { padding-left: 28px; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 300; line-height: 1; margin-bottom: 4px;
-  }
-  .stat-label {
-    font-size: 11px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--mid);
-  }
+/* VIVIENDAS */
+.viviendas-section { padding:100px 60px; }
+.viviendas-intro { display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-bottom:60px; align-items:start; }
+.viviendas-tabs { display:flex; border-bottom:1px solid rgba(123,158,130,.3); margin-bottom:0; }
+.tab-btn { padding:12px 28px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; background:none; border:none; cursor:pointer; color:var(--mid); font-family:'Inter',sans-serif; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all .2s; }
+.tab-btn.active { color:var(--sage); border-bottom-color:var(--sage); font-weight:500; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
 
-  /* GALLERY */
-  .gallery {
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 340px 340px;
-    gap: 4px;
-  }
-  .gallery-item { overflow: hidden; background: #d0cbc4; }
-  .gallery-item img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform .6s ease; display: block;
-  }
-  .gallery-item:hover img { transform: scale(1.04); }
-  .gallery-item.large { grid-column: span 2; }
+/* Vivienda accordion */
+.vivienda-item { border-bottom:1px solid rgba(123,158,130,.2); }
+.vivienda-header { display:flex; align-items:center; gap:24px; padding:24px 0; cursor:pointer; transition:padding .2s; user-select:none; }
+.vivienda-header:hover { padding-left:6px; }
+.vivienda-num { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; color:var(--sage); min-width:56px; }
+.vivienda-meta { flex:1; }
+.vivienda-tipo { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--sage); font-weight:500; margin-bottom:3px; }
+.vivienda-planta { font-size:13px; color:var(--mid); }
+.vivienda-sup { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; color:var(--charcoal); white-space:nowrap; }
+.vivienda-precio { font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--stone); font-weight:500; white-space:nowrap; }
+.vivienda-arrow { width:20px; height:20px; flex-shrink:0; color:var(--mid); transition:transform .3s; }
+.vivienda-item.open .vivienda-arrow { transform:rotate(180deg); }
+.vivienda-body { max-height:0; overflow:hidden; transition:max-height .5s ease; }
+.vivienda-item.open .vivienda-body { max-height:1000px; }
+.vivienda-inner { padding:0 0 36px 80px; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.vivienda-plano { width:100%; border-radius:2px; display:block; background:#f5f5f0; }
+.vivienda-data { }
+.data-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+.data-item .data-label { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--mid); margin-bottom:4px; }
+.data-item .data-val { font-size:18px; font-family:'Cormorant Garamond',serif; font-weight:300; color:var(--charcoal); }
+.rooms-title { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--mid); margin-bottom:12px; }
+.rooms-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+.room-tag { background:rgba(123,158,130,.1); border:1px solid rgba(123,158,130,.25); padding:5px 12px; font-size:12px; color:var(--charcoal); border-radius:2px; }
+.precio-box { background:var(--sage); color:var(--white); padding:18px 24px; display:flex; justify-content:space-between; align-items:center; }
+.precio-label { font-size:11px; letter-spacing:.15em; text-transform:uppercase; opacity:.8; }
+.precio-val { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; }
+.contactar-btn { display:inline-block; margin-top:12px; width:100%; text-align:center; border:1px solid var(--sage); color:var(--sage); text-decoration:none; padding:12px; font-size:11px; letter-spacing:.15em; text-transform:uppercase; transition:all .2s; }
+.contactar-btn:hover { background:var(--sage); color:var(--white); }
 
-  /* FEATURES */
-  .features {
-    background: var(--charcoal); color: var(--white);
-    padding: 100px 60px;
-  }
-  .features h2 { color: var(--white); }
-  .features h2 em { color: var(--sage-lt); }
-  .features-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1px; margin-top: 60px;
-    border: 1px solid rgba(255,255,255,.12);
-  }
-  .feature-card {
-    padding: 40px 32px;
-    border-right: 1px solid rgba(255,255,255,.12);
-  }
-  .feature-card:last-child { border-right: none; }
-  .feature-icon { width: 44px; height: 44px; margin-bottom: 20px; }
-  .feature-icon svg {
-    width: 100%; height: 100%;
-    stroke: var(--sage-lt); fill: none;
-    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .feature-title {
-    font-size: 12px; letter-spacing: .15em;
-    text-transform: uppercase; font-weight: 500;
-    color: var(--sage-lt); margin-bottom: 12px;
-  }
-  .feature-desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.7; }
+/* LOCATION */
+.location { display:grid; grid-template-columns:1.1fr 1fr; min-height:600px; }
+.location-map { background:url('map_local.jpg') center/cover; min-height:500px; }
+.location-text { padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+.distances { margin-top:36px; }
+.dist-item { display:flex; justify-content:space-between; align-items:baseline; padding:11px 0; border-bottom:1px solid rgba(123,158,130,.2); font-size:14px; }
+.dist-item:last-child { border-bottom:none; }
+.dist-time { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:300; color:var(--sage); }
 
-  /* TYPOLOGIES */
-  .typologies { padding: 100px 60px; }
-  .typo-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; margin-top: 60px;
-    border: 1px solid rgba(123,158,130,.2);
-  }
-  .typo-card {
-    padding: 48px 36px;
-    border-right: 1px solid rgba(123,158,130,.2);
-    transition: background .3s;
-  }
-  .typo-card:hover { background: rgba(123,158,130,.06); }
-  .typo-card:last-child { border-right: none; }
-  .typo-type {
-    font-size: 11px; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--sage);
-    font-weight: 500; margin-bottom: 12px;
-  }
-  .typo-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 300; line-height: 1.1; margin-bottom: 16px;
-  }
-  .typo-count { font-size: 13px; color: var(--mid); margin-bottom: 24px; }
-  .typo-range {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; margin-bottom: 4px;
-  }
-  .typo-range-label {
-    font-size: 11px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--mid);
-  }
-  .typo-divider { height: 1px; background: rgba(123,158,130,.2); margin: 28px 0; }
-  .typo-detail { font-size: 13px; color: var(--mid); line-height: 1.6; }
+/* AERIAL */
+.aerial { overflow:hidden; }
+.aerial img { width:100%; display:block; max-height:440px; object-fit:cover; }
 
-  /* LOCATION */
-  .location {
-    display: grid; grid-template-columns: 1.1fr 1fr;
-    min-height: 620px; padding: 0;
-  }
-  .location-map {
-    background: url('map_local.jpg') center/cover no-repeat;
-    min-height: 500px;
-  }
-  .location-text {
-    padding: 80px 60px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .distances { margin-top: 40px; }
-  .dist-item {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 12px 0; border-bottom: 1px solid rgba(123,158,130,.2);
-    font-size: 14px;
-  }
-  .dist-item:last-child { border-bottom: none; }
-  .dist-time {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 300; color: var(--sage);
-  }
+/* QUIENES */
+.quienes { display:grid; grid-template-columns:1fr 1fr; gap:80px; padding:100px 60px; background:#EDE8DE; }
+.quienes-right { display:flex; flex-direction:column; gap:28px; }
+.partner-card { padding:32px; background:var(--white); border-left:3px solid var(--sage); }
+.partner-logo { height:36px; margin-bottom:14px; display:block; object-fit:contain; object-position:left; }
+.partner-text { font-size:14px; color:var(--mid); line-height:1.7; }
 
-  /* AERIAL */
-  .aerial { padding: 0; overflow: hidden; }
-  .aerial img { width: 100%; display: block; max-height: 480px; object-fit: cover; }
+/* CTA */
+.cta-section { background:var(--sage); color:var(--white); text-align:center; padding:100px 60px; }
+.cta-section .section-eyebrow { color:rgba(255,255,255,.7); }
+.cta-section h2 { color:var(--white); font-size:clamp(38px,5vw,64px); margin-bottom:8px; }
+.cta-section h2 em { color:rgba(255,255,255,.65); }
+.cta-section p { font-size:15px; opacity:.8; max-width:480px; margin:0 auto 48px; }
+.cta-btn { display:inline-block; border:1.5px solid var(--white); color:var(--white); text-decoration:none; padding:14px 48px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; margin:0 8px; }
+.cta-btn:hover { background:var(--white); color:var(--sage); }
+.cta-btn.solid { background:var(--white); color:var(--sage); }
+.cta-btn.solid:hover { background:transparent; color:var(--white); }
 
-  /* QUIENES */
-  .quienes {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; padding: 100px 60px;
-    background: #EDE8DE;
-  }
-  .quienes-right { display: flex; flex-direction: column; gap: 28px; }
-  .partner-card {
-    padding: 32px; background: var(--white);
-    border-left: 3px solid var(--sage);
-  }
-  .partner-logo {
-    height: 38px; margin-bottom: 16px;
-    display: block; object-fit: contain; object-position: left;
-  }
-  .partner-text { font-size: 14px; color: var(--mid); line-height: 1.7; }
+/* DISCLAIMER + FOOTER */
+.disclaimer { background:var(--charcoal); border-top:1px solid rgba(255,255,255,.08); padding:28px 60px; font-size:10.5px; color:rgba(255,255,255,.28); line-height:1.7; }
+footer { background:var(--charcoal); color:rgba(255,255,255,.4); padding:40px 60px; font-size:11px; line-height:1.8; display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap; }
+.footer-logos { display:flex; gap:24px; align-items:center; }
+.footer-logos img { height:32px; object-fit:contain; opacity:.65; }
+.footer-logos .sep { width:1px; height:24px; background:rgba(255,255,255,.2); }
+footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
-  /* CTA */
-  .cta-section {
-    background: var(--sage); color: var(--white);
-    text-align: center; padding: 100px 60px;
-  }
-  .cta-section .section-eyebrow { color: rgba(255,255,255,.7); }
-  .cta-section h2 { color: var(--white); font-size: clamp(38px, 5vw, 64px); margin-bottom: 8px; }
-  .cta-section h2 em { color: rgba(255,255,255,.65); }
-  .cta-section p { font-size: 15px; opacity: .8; max-width: 480px; margin: 0 auto 48px; }
-  .cta-btn {
-    display: inline-block;
-    border: 1.5px solid var(--white);
-    color: var(--white); text-decoration: none;
-    padding: 14px 48px;
-    font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
-    transition: background .25s, color .25s; margin: 0 8px;
-  }
-  .cta-btn:hover { background: var(--white); color: var(--sage); }
-  .cta-btn.solid { background: var(--white); color: var(--sage); }
-  .cta-btn.solid:hover { background: transparent; color: var(--white); }
-
-  /* DISCLAIMER */
-  .disclaimer {
-    background: var(--charcoal);
-    border-top: 1px solid rgba(255,255,255,.08);
-    padding: 28px 60px;
-    font-size: 10.5px; color: rgba(255,255,255,.3); line-height: 1.7;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--charcoal); color: rgba(255,255,255,.4);
-    padding: 40px 60px; font-size: 11px; line-height: 1.8;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 40px; flex-wrap: wrap;
-  }
-  footer a { color: rgba(255,255,255,.4); text-decoration: none; }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-img { min-height: 55vw; }
-    .hero-text { padding: 60px 28px; }
-    .intro { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
-    .intro-moodboard { height: 240px; }
-    .promo { grid-template-columns: 1fr; }
-    .promo-text { padding: 60px 24px; }
-    .promo-img { min-height: 300px; order: -1; }
-    .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .gallery-item { height: 220px; }
-    .gallery-item.large { grid-column: span 2; height: 280px; }
-    .features { padding: 60px 24px; }
-    .features-grid { grid-template-columns: 1fr 1fr; }
-    .feature-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); }
-    .typologies { padding: 60px 24px; }
-    .typo-grid { grid-template-columns: 1fr; }
-    .typo-card { border-right: none; border-bottom: 1px solid rgba(123,158,130,.2); }
-    .location { grid-template-columns: 1fr; }
-    .location-text { padding: 60px 24px; }
-    .quienes { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
-    .cta-section { padding: 60px 24px; }
-    .cta-btn { margin: 6px; }
-    footer { flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px 24px; }
-    .disclaimer { padding: 24px; }
-  }
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .hero-content { padding:0 24px 60px; }
+  .intro,.quienes,.viviendas-intro { grid-template-columns:1fr; gap:40px; padding:60px 24px; }
+  .intro-moodboard { height:240px; }
+  .promo { grid-template-columns:1fr; }
+  .promo-img { height:300px; order:-1; }
+  .promo-text { padding:60px 24px; }
+  .gallery { grid-template-columns:1fr 1fr; }
+  .gallery-item.large { grid-column:span 2; height:260px; }
+  .gallery-item { height:200px; }
+  .features { padding:60px 24px; }
+  .features-grid { grid-template-columns:1fr 1fr; }
+  .feature-card { border-right:none; border-bottom:1px solid rgba(255,255,255,.1); }
+  .viviendas-section { padding:60px 24px; }
+  .vivienda-inner { grid-template-columns:1fr; padding-left:0; padding-top:20px; gap:24px; }
+  .data-grid { grid-template-columns:1fr 1fr 1fr; }
+  .location { grid-template-columns:1fr; }
+  .location-text { padding:60px 24px; }
+  .cta-section { padding:60px 24px; }
+  footer { flex-direction:column; align-items:flex-start; padding:32px 24px; gap:20px; }
+  .disclaimer { padding:24px; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">
-    <img src="logo_bauer.png" alt="Bauer Capital Group">
-  </div>
+  <div></div>
   <ul class="nav-links">
     <li><a href="#intro">El Proyecto</a></li>
     <li><a href="#promo">La Promoción</a></li>
-    <li><a href="#viviendas">Las Viviendas</a></li>
+    <li><a href="#viviendas">Viviendas</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="#quienes">Quiénes Somos</a></li>
     <li><a href="#contacto" class="nav-cta">Contactar</a></li>
@@ -399,73 +212,56 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-img" role="img" aria-label="Fachada Residencial Torre Jardín"></div>
-  <div class="hero-text">
-    <p class="hero-eyebrow">Promoción de Obra Nueva</p>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Promoción de Obra Nueva · Paterna, Valencia</p>
     <h1 class="hero-title">Residencial<br>Torre Jardín</h1>
-    <p class="hero-subtitle">Paterna · Valencia</p>
+    <p class="hero-sub">Un hogar diseñado para inspirar</p>
     <div class="hero-badge">13 Viviendas Exclusivas</div>
     <div class="hero-logos">
       <img src="logo_villegas.png" alt="Grupo Villegas">
       <div class="sep"></div>
       <img src="logo_horizon.png" alt="Grupo Horizon Terra">
+      <div class="sep"></div>
+      <img src="logo_bauer.png" alt="Bauer Capital Group">
     </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Descubrir</span>
   </div>
 </section>
 
 <!-- INTRO -->
 <section class="intro" id="intro">
-  <div>
+  <div class="reveal">
     <div class="section-num">01</div>
     <h2>Un hogar diseñado para <em>inspirar</em></h2>
-    <p class="lead" style="margin-top:20px;">
-      Residencial Torre Jardín nace de la fusión entre la calidez del diseño nórdico y la luminosidad mediterránea. Cada vivienda ha sido concebida con atención milimétrica al detalle, materiales nobles y espacios que invitan a vivir.
-    </p>
-    <p class="lead">
-      Más que un conjunto de viviendas, Torre Jardín propone una forma de habitar basada en la armonía, la practicidad y el cuidado de cada espacio. Un proyecto donde cada rincón tiene sentido y el hogar es, ante todo, un lugar donde sentirse bien.
-    </p>
+    <p class="lead" style="margin-top:20px;">Residencial Torre Jardín nace de la fusión entre la calidez del diseño nórdico y la luminosidad mediterránea. Cada vivienda ha sido concebida con atención milimétrica al detalle, materiales nobles y espacios que invitan a vivir.</p>
+    <p class="lead">La selección de materiales, texturas y acabados contribuye a generar una atmósfera cálida y atemporal, donde la sencillez se convierte en un valor diferencial. Un proyecto concebido para que el hogar sea, ante todo, un lugar donde sentirse bien.</p>
   </div>
-  <div class="intro-moodboard">
-    <div class="mood-span-col" style="background:url('interior3.jpg') center/cover no-repeat;"></div>
-    <div class="mood-top-right" style="background:url('interior1.jpg') center/cover no-repeat;"></div>
-    <div class="mood-green"></div>
+  <div class="intro-moodboard reveal">
+    <div class="mood-a"></div>
+    <div class="mood-b"></div>
+    <div class="mood-sage"></div>
     <div class="mood-cream"></div>
   </div>
 </section>
 
-<!-- VIDEO -->
-<div class="video-section">
-  <div class="video-wrapper">
-    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
-      <source src="video.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-
 <!-- PROMO -->
 <section class="promo" id="promo">
-  <div class="promo-text">
+  <div class="promo-text reveal">
     <div class="section-num">03</div>
     <h2>Un edificio pensado para <em>sentirse en casa</em></h2>
-    <p class="lead" style="margin-top:20px;">
-      Una promoción de obra nueva en el corazón de Paterna, diseñada para ofrecer hogares cómodos, funcionales y adaptados a las necesidades de la vida actual. Líneas sencillas y arquitectura integrada en su entorno, que apuesta por la calidad, la luminosidad y el bienestar cotidiano.
-    </p>
-    <p class="lead">
-      El edificio cuenta con tan solo 13 viviendas, entre estudios y viviendas de dos dormitorios, creando un ambiente residencial tranquilo y cercano. Cada espacio ha sido concebido para aprovechar al máximo la luz natural.
-    </p>
-    <div class="promo-stats">
-      <div class="stat">
-        <div class="stat-num">13</div>
-        <div class="stat-label">Viviendas</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Plantas + Ático</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">A+</div>
-        <div class="stat-label">Eficiencia</div>
-      </div>
+    <p class="lead" style="margin-top:20px;">Una promoción de obra nueva en el corazón de Paterna, diseñada para ofrecer hogares cómodos, funcionales y adaptados a las necesidades de la vida actual. Arquitectura de líneas sencillas integrada en su entorno.</p>
+    <p class="lead">13 viviendas exclusivas, entre estudios y viviendas de dos dormitorios, creando un ambiente residencial tranquilo y cercano. Sus acabados de primera calidad aportan confort y funcionalidad a cada espacio.</p>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">13</div><div class="stat-label">Viviendas</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Plantas + Ático</div></div>
+      <div class="stat"><div class="stat-num">A+</div><div class="stat-label">Eficiencia</div></div>
     </div>
   </div>
   <div class="promo-img"></div>
@@ -473,103 +269,541 @@
 
 <!-- GALLERY -->
 <div class="gallery">
-  <div class="gallery-item large">
-    <img src="exterior.jpg" alt="Fachada exterior">
-  </div>
-  <div class="gallery-item">
-    <img src="interior1.jpg" alt="Interior cocina">
-  </div>
-  <div class="gallery-item">
-    <img src="interior3.jpg" alt="Interior salón">
-  </div>
-  <div class="gallery-item">
-    <img src="interior2.jpg" alt="Interior salón-comedor">
-  </div>
+  <div class="gallery-item large"><img src="exterior.jpg" alt="Fachada exterior"></div>
+  <div class="gallery-item"><img src="interior1.jpg" alt="Interior cocina"></div>
+  <div class="gallery-item"><img src="interior3.jpg" alt="Interior salón"></div>
+  <div class="gallery-item"><img src="interior2.jpg" alt="Interior salón-comedor"></div>
 </div>
 
 <!-- FEATURES -->
-<section class="features" id="viviendas">
-  <div class="section-eyebrow">04 · Tu Casa</div>
-  <h2>Calidad, luz y bienestar <em>para tu día a día</em></h2>
-  <div class="features-grid">
+<section class="features">
+  <div class="reveal">
+    <div class="section-eyebrow">04 · Tu Casa</div>
+    <h2>Calidad, luz y bienestar <em>para tu día a día</em></h2>
+  </div>
+  <div class="features-grid reveal">
     <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <div class="feature-title">Terraza Propia</div>
       <div class="feature-desc">Todas las viviendas disponen de terraza o balcón con carpintería en verde salvia.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
       <div class="feature-title">Luz Natural</div>
       <div class="feature-desc">Amplios ventanales de suelo a techo para maximizar la luminosidad en cada estancia.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="feature-title">Calidad Premium</div>
       <div class="feature-desc">Electrodomésticos integrados, cocina equipada y acabados de primera calidad.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <div class="feature-title">Eficiencia A+</div>
       <div class="feature-desc">Aislamiento de alta prestación y domótica para un hogar sostenible y económico.</div>
     </div>
   </div>
 </section>
 
-<!-- TYPOLOGIES -->
-<section class="typologies">
-  <div class="section-eyebrow">05 · Tipologías</div>
-  <h2>Encuentra tu <em>espacio ideal</em></h2>
-  <p class="lead" style="margin-top:16px;">
-    Una cuidada selección de 13 viviendas exclusivas: 4 estudios, 7 viviendas de dos dormitorios y 2 áticos, donde funcionalidad, diseño y confort conviven en perfecta armonía.
-  </p>
-  <div class="typo-grid">
-    <div class="typo-card">
-      <div class="typo-type">Tipo A</div>
-      <div class="typo-name">Estudios</div>
-      <div class="typo-count">4 unidades disponibles</div>
-      <div class="typo-range">34 – 42 m²</div>
-      <div class="typo-range-label">Superficie útil</div>
-      <div class="typo-divider"></div>
-      <div class="typo-detail">Aprovechamiento inteligente del espacio. Ambientes luminosos, versátiles y acogedores, ideales para quienes buscan una vivienda práctica sin renunciar al diseño y la calidad.</div>
+<!-- VIVIENDAS -->
+<section class="viviendas-section" id="viviendas">
+  <div class="viviendas-intro reveal">
+    <div>
+      <div class="section-num">05</div>
+      <h2>Encuentra tu <em>espacio ideal</em></h2>
     </div>
-    <div class="typo-card">
-      <div class="typo-type">Tipo B</div>
-      <div class="typo-name">2 Dormitorios</div>
-      <div class="typo-count">7 unidades disponibles</div>
-      <div class="typo-range">61 – 95 m²</div>
-      <div class="typo-range-label">Superficie útil</div>
-      <div class="typo-divider"></div>
-      <div class="typo-detail">Amplitud, bienestar y distribución equilibrada. Zonas de día y descanso conectadas de forma natural. Hogares funcionales adaptados a las necesidades cotidianas.</div>
+    <p class="lead">13 viviendas exclusivas distribuidas en 4 estudios, 7 viviendas de 2 dormitorios y 2 áticos de 2 dormitorios. Haz clic en cada vivienda para ver el plano y los detalles completos.</p>
+  </div>
+
+  <div class="viviendas-tabs reveal">
+    <button class="tab-btn active" onclick="showTab('estudios',this)">Estudios (4)</button>
+    <button class="tab-btn" onclick="showTab('dosdorm',this)">2 Dormitorios (7)</button>
+    <button class="tab-btn" onclick="showTab('aticos',this)">Áticos (2)</button>
+  </div>
+
+  <!-- MACRO para vivienda -->
+
+  <!-- ESTUDIOS -->
+  <div class="tab-panel active" id="tab-estudios">
+
+    <!-- VIV 02 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">02</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Estudio</div><div class="vivienda-planta">Planta Baja</div></div>
+        <div class="vivienda-sup">34,20 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_26.jpg" alt="Plano Vivienda 02">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">34,20 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">39,84 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">4,41%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Baja</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Estudio 30,58 m²</span>
+              <span class="room-tag">Baño 3,62 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 02">Solicitar información</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="typo-card">
-      <div class="typo-type">Tipo C · Exclusivo</div>
-      <div class="typo-name">Áticos 2 Dorm.</div>
-      <div class="typo-count">2 unidades · Planta ático</div>
-      <div class="typo-range">72 – 84 m²</div>
-      <div class="typo-range-label">Superficie útil</div>
-      <div class="typo-divider"></div>
-      <div class="typo-detail">Viviendas singulares con amplias terrazas privadas. Espacios exteriores como extensión natural del hogar, perfectos para disfrutar del clima mediterráneo todo el año.</div>
+
+    <!-- VIV 04 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">04</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Estudio</div><div class="vivienda-planta">Planta Primera</div></div>
+        <div class="vivienda-sup">33,72 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_28.jpg" alt="Plano Vivienda 04">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">38,12 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">4,22%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Primera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Estudio 28,72 m²</span>
+              <span class="room-tag">Balcón 1,95 m²</span>
+              <span class="room-tag">Baño 3,05 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 04">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 07 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">07</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Estudio</div><div class="vivienda-planta">Planta Segunda</div></div>
+        <div class="vivienda-sup">33,72 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_31.jpg" alt="Plano Vivienda 07">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">38,12 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">4,22%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Segunda</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Estudio 28,72 m²</span>
+              <span class="room-tag">Balcón 1,95 m²</span>
+              <span class="room-tag">Baño 3,05 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 07">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 10 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">10</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Estudio</div><div class="vivienda-planta">Planta Tercera</div></div>
+        <div class="vivienda-sup">33,72 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_34.jpg" alt="Plano Vivienda 10">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">38,12 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">4,22%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Tercera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Estudio 28,72 m²</span>
+              <span class="room-tag">Balcón 1,95 m²</span>
+              <span class="room-tag">Baño 3,05 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 10">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 DORMITORIOS -->
+  <div class="tab-panel" id="tab-dosdorm">
+
+    <!-- VIV 01 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">01</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Baja</div></div>
+        <div class="vivienda-sup">95,01 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_25.jpg" alt="Plano Vivienda 01">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">95,01 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">111,71 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">12,38%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Baja</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Salón-cocina 31,37 m²</span>
+              <span class="room-tag">Esp. polivalente 12,96 m²</span>
+              <span class="room-tag">Dorm. ppal 13,00 m²</span>
+              <span class="room-tag">Dorm. 2 · 7,30 m²</span>
+              <span class="room-tag">Patio interior 14,82 m²</span>
+              <span class="room-tag">Baño ppal 3,24 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 7,49 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 01">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 03 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">03</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Primera</div></div>
+        <div class="vivienda-sup">61,36 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_27.jpg" alt="Plano Vivienda 03">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">74,55 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">13,46%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Primera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,62 m²</span>
+              <span class="room-tag">Salón-cocina 24,08 m²</span>
+              <span class="room-tag">Dorm. ppal 10,89 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,30 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 03">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 05 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">05</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Primera</div></div>
+        <div class="vivienda-sup">62,95 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_29.jpg" alt="Plano Vivienda 05">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">76,15 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">8,44%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Primera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,77 m²</span>
+              <span class="room-tag">Salón-cocina 25,64 m²</span>
+              <span class="room-tag">Dorm. ppal 10,83 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,24 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 05">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 06 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">06</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Segunda</div></div>
+        <div class="vivienda-sup">61,36 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_30.jpg" alt="Plano Vivienda 06">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">74,55 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">8,26%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Segunda</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,62 m²</span>
+              <span class="room-tag">Salón-cocina 24,08 m²</span>
+              <span class="room-tag">Dorm. ppal 10,89 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,30 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 06">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 08 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">08</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Segunda</div></div>
+        <div class="vivienda-sup">62,95 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_32.jpg" alt="Plano Vivienda 08">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">76,15 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">8,44%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Segunda</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,77 m²</span>
+              <span class="room-tag">Salón-cocina 25,64 m²</span>
+              <span class="room-tag">Dorm. ppal 10,83 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,24 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 08">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 09 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">09</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Tercera</div></div>
+        <div class="vivienda-sup">61,36 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_33.jpg" alt="Plano Vivienda 09">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">74,55 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">8,26%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Tercera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,62 m²</span>
+              <span class="room-tag">Salón-cocina 24,08 m²</span>
+              <span class="room-tag">Dorm. ppal 10,89 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,30 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 09">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 11 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">11</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">2 Dormitorios</div><div class="vivienda-planta">Planta Tercera</div></div>
+        <div class="vivienda-sup">62,95 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_35.jpg" alt="Plano Vivienda 11">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">76,15 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">8,44%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Tercera</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 4,77 m²</span>
+              <span class="room-tag">Salón-cocina 25,64 m²</span>
+              <span class="room-tag">Dorm. ppal 10,83 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,24 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 11">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁTICOS -->
+  <div class="tab-panel" id="tab-aticos">
+
+    <!-- VIV 12 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">12</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Ático · 2 Dormitorios</div><div class="vivienda-planta">Planta Ático</div></div>
+        <div class="vivienda-sup">83,92 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_36.jpg" alt="Plano Vivienda 12">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">83,92 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">98,89 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">10,96%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Ático</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 13,71 m²</span>
+              <span class="room-tag">Salón-cocina 37,55 m²</span>
+              <span class="room-tag">Dorm. ppal 10,89 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,30 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 12 Ático">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIV 13 -->
+    <div class="vivienda-item">
+      <div class="vivienda-header" onclick="toggleViv(this)">
+        <div class="vivienda-num">13</div>
+        <div class="vivienda-meta"><div class="vivienda-tipo">Ático · 2 Dormitorios</div><div class="vivienda-planta">Planta Ático</div></div>
+        <div class="vivienda-sup">72,24 m²</div>
+        
+        <svg class="vivienda-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="vivienda-body">
+        <div class="vivienda-inner">
+          <img class="vivienda-plano" src="planos/plano_37.jpg" alt="Plano Vivienda 13">
+          <div class="vivienda-data">
+            <div class="data-grid">
+              <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">72,24 m²</div></div>
+              <div class="data-item"><div class="data-label">Sup. construida</div><div class="data-val">85,68 m²</div></div>
+              <div class="data-item"><div class="data-label">% ZZ.CC</div><div class="data-val">9,49%</div></div>
+              <div class="data-item"><div class="data-label">Planta</div><div class="data-val">Ático</div></div>
+            </div>
+            <div class="rooms-title">Distribución</div>
+            <div class="rooms-list">
+              <span class="room-tag">Terraza 11,89 m²</span>
+              <span class="room-tag">Salón-cocina 27,81 m²</span>
+              <span class="room-tag">Dorm. ppal 10,83 m²</span>
+              <span class="room-tag">Dorm. 2 · 6,77 m²</span>
+              <span class="room-tag">Baño ppal 3,24 m²</span>
+              <span class="room-tag">Baño 3,01 m²</span>
+              <span class="room-tag">Lavadero 1,82 m²</span>
+              <span class="room-tag">Pasillo 6,87 m²</span>
+            </div>
+            
+            <a class="contactar-btn" href="mailto:info@bauercapitalgroup.com?subject=Información Vivienda 13 Ático">Solicitar información</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- LOCATION -->
 <section class="location" id="ubicacion">
-  <div class="location-map" role="img" aria-label="Mapa de servicios del entorno"></div>
-  <div class="location-text">
+  <div class="location-map" role="img" aria-label="Mapa del entorno"></div>
+  <div class="location-text reveal">
     <div class="section-num">02</div>
     <h2>En el corazón de <em>Valencia</em></h2>
-    <p class="lead" style="margin-top:16px;">
-      C/ Ramón Ferrando, 5 · Paterna. En un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.
-    </p>
+    <p class="lead" style="margin-top:16px;">C/ Ramón Ferrando, 5 · Paterna. Un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.</p>
     <div class="distances">
       <div class="dist-item"><span>Centro Valencia</span><span class="dist-time">20 min</span></div>
       <div class="dist-item"><span>Aeropuerto VLC</span><span class="dist-time">15 min</span></div>
@@ -577,33 +811,27 @@
       <div class="dist-item"><span>Nou Mestalla</span><span class="dist-time">15 min</span></div>
       <div class="dist-item"><span>Feria Valencia</span><span class="dist-time">10 min</span></div>
       <div class="dist-item"><span>Campus UV Burjassot</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span>Metro Paterna (L2)</span><span class="dist-time">5 min</span></div>
       <div class="dist-item"><span>Playa Malvarrosa</span><span class="dist-time">30 min</span></div>
     </div>
   </div>
 </section>
 
 <!-- AERIAL -->
-<div class="aerial">
+<div class="aerial reveal">
   <img src="map_aerial.jpg" alt="Vista aérea de Paterna y entorno">
 </div>
 
-<!-- QUIENES SOMOS -->
+<!-- QUIENES -->
 <section class="quienes" id="quienes">
-  <div>
+  <div class="reveal">
     <div class="section-num">06</div>
     <h2>¿Quiénes <em>somos?</em></h2>
-    <p class="lead" style="margin-top:20px;">
-      Esta promoción nace de la unión de dos grupos con sólida trayectoria y visión compartida: crear proyectos inmobiliarios de alto valor, concebidos para las personas y desarrollados con los máximos estándares de calidad, gestión y rentabilidad.
-    </p>
-    <p class="lead">
-      La combinación de ambas compañías da lugar a una alianza estratégica que integra visión promotora, capacidad de gestión, experiencia constructiva y conocimiento del mercado, garantizando rigor, transparencia y excelencia en todas las etapas.
-    </p>
-    <p style="font-size:13px; color:var(--mid); margin-top:8px;">
-      <strong style="font-weight:500; color:var(--charcoal);">Arquitectura:</strong> PRB Value · zetaestudio &nbsp;·&nbsp;
-      <strong style="font-weight:500; color:var(--charcoal);">Construcción:</strong> Prime Build S.L.
-    </p>
+    <p class="lead" style="margin-top:20px;">Esta promoción nace de la unión de dos grupos con sólida trayectoria y visión compartida: crear proyectos inmobiliarios de alto valor, concebidos para las personas y desarrollados con los máximos estándares de calidad, gestión y rentabilidad.</p>
+    <p class="lead">La combinación de ambas compañías da lugar a una alianza estratégica que integra visión promotora, capacidad de gestión, experiencia constructiva y conocimiento del mercado, garantizando rigor, transparencia y excelencia en todas las etapas.</p>
+    <p style="font-size:13px;color:var(--mid);margin-top:8px;"><strong style="font-weight:500;color:var(--charcoal);">Arquitectura:</strong> PRB Value · zetaestudio &nbsp;·&nbsp; <strong style="font-weight:500;color:var(--charcoal);">Construcción:</strong> Prime Build S.L.</p>
   </div>
-  <div class="quienes-right">
+  <div class="quienes-right reveal">
     <div class="partner-card">
       <img class="partner-logo" src="logo_horizon.png" alt="Grupo Horizon Terra">
       <p class="partner-text">Grupo Horizon Terra aporta experiencia en el desarrollo integral de proyectos residenciales, combinando planificación estratégica, excelencia constructiva y cuidada atención al detalle en cada fase del proceso, desde la selección de la ubicación hasta la entrega final.</p>
@@ -619,21 +847,22 @@
 <section class="cta-section" id="contacto">
   <div class="section-eyebrow">Tu Nuevo Hogar Te Espera</div>
   <h2>Bienvenido a <em>tu nuevo hogar</em></h2>
-  <p>Solicita información, visita nuestra oficina de ventas o descarga el dossier completo.</p>
+  <p>Solicita información sobre disponibilidad, precios y visitas.</p>
   <a href="mailto:info@bauercapitalgroup.com" class="cta-btn solid">Solicitar Información</a>
   <a href="tel:+34900000000" class="cta-btn">Llamar Ahora</a>
 </section>
 
-<!-- DISCLAIMER -->
 <div class="disclaimer">
-  La presente información y documentación gráfica tienen carácter orientativo, no siendo vinculante desde el punto de vista contractual. Ha sido elaborada a partir del Proyecto Básico presentado para tramitación de la licencia de obras, reservándose la facultad de introducir posibles modificaciones por exigencias de índole técnica, jurídica o administrativa. Infografías exteriores e interiores meramente ilustrativas y sujetas a posibles modificaciones. El equipamiento de las viviendas será el indicado en la correspondiente memoria de calidades, por lo que no está incluido el mobiliario de las infografías. La calificación energética se encuentra en tramitación. Información según lo establecido en la Ley 8/2004, de 20 de Octubre, de la Vivienda de la Comunidad Valenciana.
+  La presente información y documentación gráfica tienen carácter orientativo, no siendo vinculante desde el punto de vista contractual. Ha sido elaborada a partir del Proyecto Básico presentado para tramitación de la licencia de obras. Infografías exteriores e interiores meramente ilustrativas. Las superficies reflejadas son aproximadas y podrán sufrir variaciones. El equipamiento de las viviendas será el indicado en la correspondiente memoria de calidades. La calificación energética se encuentra en tramitación. Información según lo establecido en la Ley 8/2004, de 20 de Octubre, de la Vivienda de la Comunidad Valenciana.
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div>
-    <img src="logo_bauer.png" alt="Bauer Capital Group" style="height:34px; opacity:.7; display:block; margin-bottom:12px;">
-    © 2025 Bauer Capital Group · Todos los derechos reservados
+  <div class="footer-logos">
+    <img src="logo_villegas.png" alt="Grupo Villegas">
+    <div class="sep"></div>
+    <img src="logo_horizon.png" alt="Grupo Horizon Terra">
+    <div class="sep"></div>
+    <img src="logo_bauer.png" alt="Bauer Capital Group">
   </div>
   <div style="text-align:right;">
     Residencial Torre Jardín · C/ Ramón Ferrando, 5 · Paterna, Valencia<br>
@@ -642,10 +871,27 @@
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); });
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleViv(header) {
+  const item = header.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.vivienda-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
