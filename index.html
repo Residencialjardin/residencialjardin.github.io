@@ -132,9 +132,9 @@ h2 em { font-style:italic; color:var(--stone); }
 .contactar-btn:hover { background:var(--sage); color:var(--white); }
 
 /* LOCATION */
-.location { display:grid; grid-template-columns:1.1fr 1fr; }
-.location-map { overflow:hidden; } .location-map img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; background:#1a1a1a; }
-.location-text { padding:60px 60px; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; }
+.location { display:flex; flex-direction:column; }
+.location-map { background:url("map_local.jpg") center center / cover no-repeat; width:100%; padding-top:46.9%; }
+.location-text { padding:60px 60px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
 .distances { margin-top:36px; }
 .dist-item { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid rgba(123,158,130,.2); font-size:14px; }
 .dist-item:last-child { border-bottom:none; }
@@ -190,8 +190,8 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
   .viviendas-section { padding:60px 24px; }
   .vivienda-inner { grid-template-columns:1fr; padding-left:0; padding-top:20px; gap:24px; }
   .data-grid { grid-template-columns:1fr 1fr 1fr; }
-  .location { grid-template-columns:1fr; }
-  .location-text { padding:60px 24px; }
+  .location { flex-direction:column; }
+  .location-text { padding:40px 24px; grid-template-columns:1fr; }
   .cta-section { padding:60px 24px; }
   footer { flex-direction:column; align-items:flex-start; padding:32px 24px; gap:20px; }
   .disclaimer { padding:24px; }
@@ -810,9 +810,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
 <!-- LOCATION -->
 <section class="location" id="ubicacion">
-  <div class="location-map">
-    <img src="map_local.jpg" alt="Mapa del entorno Residencial Torre Jardín">
-  </div>
+  <div class="location-map"></div>
   <div class="location-text reveal">
     <div class="section-num">02</div>
     <h2>En el corazón de <em>Valencia</em></h2>
