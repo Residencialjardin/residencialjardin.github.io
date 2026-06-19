@@ -28,6 +28,8 @@ nav.scrolled .nav-links a { color:var(--charcoal); }
 /* HERO */
 .hero { position:relative; height:100vh; min-height:600px; display:flex; align-items:flex-end; overflow:hidden; }
 .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.hero-img { position:absolute; inset:0; width:100%; height:120%; object-fit:cover; object-position:center top; z-index:0; animation:kenburns 20s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform:scale(1) translateY(0); } to { transform:scale(1.08) translateY(-4%); } }
 .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.08) 100%); }
 .hero-content { position:relative; z-index:2; padding:0 60px 80px; color:var(--white); animation:fadeUp .9s ease both; }
 .hero-eyebrow { font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.75; margin-bottom:16px; }
@@ -212,9 +214,9 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="video.mp4" type="video/mp4">
-  </video>
+
+
+  <img class="hero-img" src="exterior.jpg" alt="Residencial Torre Jardín">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Promoción de Obra Nueva · Paterna, Valencia</p>
@@ -337,7 +339,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_26.jpg" alt="Plano Vivienda 02">
+          <img class="vivienda-plano" src="plano_26.jpg" alt="Plano Vivienda 02">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">34,20 m²</div></div>
@@ -368,7 +370,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_28.jpg" alt="Plano Vivienda 04">
+          <img class="vivienda-plano" src="plano_28.jpg" alt="Plano Vivienda 04">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
@@ -400,7 +402,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_31.jpg" alt="Plano Vivienda 07">
+          <img class="vivienda-plano" src="plano_31.jpg" alt="Plano Vivienda 07">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
@@ -432,7 +434,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_34.jpg" alt="Plano Vivienda 10">
+          <img class="vivienda-plano" src="plano_34.jpg" alt="Plano Vivienda 10">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">33,72 m²</div></div>
@@ -468,7 +470,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_25.jpg" alt="Plano Vivienda 01">
+          <img class="vivienda-plano" src="plano_25.jpg" alt="Plano Vivienda 01">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">95,01 m²</div></div>
@@ -506,7 +508,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_27.jpg" alt="Plano Vivienda 03">
+          <img class="vivienda-plano" src="plano_27.jpg" alt="Plano Vivienda 03">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
@@ -543,7 +545,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_29.jpg" alt="Plano Vivienda 05">
+          <img class="vivienda-plano" src="plano_29.jpg" alt="Plano Vivienda 05">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
@@ -580,7 +582,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_30.jpg" alt="Plano Vivienda 06">
+          <img class="vivienda-plano" src="plano_30.jpg" alt="Plano Vivienda 06">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
@@ -617,7 +619,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_32.jpg" alt="Plano Vivienda 08">
+          <img class="vivienda-plano" src="plano_32.jpg" alt="Plano Vivienda 08">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
@@ -654,7 +656,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_33.jpg" alt="Plano Vivienda 09">
+          <img class="vivienda-plano" src="plano_33.jpg" alt="Plano Vivienda 09">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">61,36 m²</div></div>
@@ -691,7 +693,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_35.jpg" alt="Plano Vivienda 11">
+          <img class="vivienda-plano" src="plano_35.jpg" alt="Plano Vivienda 11">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">62,95 m²</div></div>
@@ -732,7 +734,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_36.jpg" alt="Plano Vivienda 12">
+          <img class="vivienda-plano" src="plano_36.jpg" alt="Plano Vivienda 12">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">83,92 m²</div></div>
@@ -769,7 +771,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       </div>
       <div class="vivienda-body">
         <div class="vivienda-inner">
-          <img class="vivienda-plano" src="planos/plano_37.jpg" alt="Plano Vivienda 13">
+          <img class="vivienda-plano" src="plano_37.jpg" alt="Plano Vivienda 13">
           <div class="vivienda-data">
             <div class="data-grid">
               <div class="data-item"><div class="data-label">Sup. útil</div><div class="data-val">72,24 m²</div></div>
@@ -894,4 +896,4 @@ function toggleViv(header) {
 }
 </script>
 </body>
-</html>  
+</html>
