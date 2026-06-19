@@ -133,7 +133,7 @@ h2 em { font-style:italic; color:var(--stone); }
 
 /* LOCATION */
 .location { display:grid; grid-template-columns:1.1fr 1fr; }
-.location-map { background:url("map_local.jpg") center/cover; min-height:600px; }
+.location-map { overflow:hidden; } .location-map img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; background:#1a1a1a; }
 .location-text { padding:60px 60px; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; }
 .distances { margin-top:36px; }
 .dist-item { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid rgba(123,158,130,.2); font-size:14px; }
@@ -810,7 +810,9 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
 <!-- LOCATION -->
 <section class="location" id="ubicacion">
-  <div class="location-map" role="img" aria-label="Mapa del entorno"></div>
+  <div class="location-map">
+    <img src="map_local.jpg" alt="Mapa del entorno Residencial Torre Jardín">
+  </div>
   <div class="location-text reveal">
     <div class="section-num">02</div>
     <h2>En el corazón de <em>Valencia</em></h2>
