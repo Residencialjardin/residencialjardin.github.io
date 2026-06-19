@@ -132,11 +132,11 @@ h2 em { font-style:italic; color:var(--stone); }
 .contactar-btn:hover { background:var(--sage); color:var(--white); }
 
 /* LOCATION */
-.location { display:grid; grid-template-columns:1.1fr 1fr; min-height:600px; }
-.location-map { background:url('map_local.jpg') center/cover; min-height:500px; }
-.location-text { padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+.location { display:grid; grid-template-columns:1.1fr 1fr; }
+.location-map { background:url("map_local.jpg") center/cover; min-height:600px; }
+.location-text { padding:60px 60px; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; }
 .distances { margin-top:36px; }
-.dist-item { display:flex; justify-content:space-between; align-items:baseline; padding:11px 0; border-bottom:1px solid rgba(123,158,130,.2); font-size:14px; }
+.dist-item { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid rgba(123,158,130,.2); font-size:14px; }
 .dist-item:last-child { border-bottom:none; }
 .dist-time { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:300; color:var(--sage); }
 
@@ -195,6 +195,11 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
   footer { flex-direction:column; align-items:flex-start; padding:32px 24px; gap:20px; }
   .disclaimer { padding:24px; }
 }
+.loc-group-title { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--sage); font-weight:500; margin-bottom:8px; margin-top:4px; }
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; }
+.nearby-item { display:flex; align-items:baseline; gap:8px; font-size:13px; color:var(--charcoal); padding:4px 0; }
+.nearby-num { font-family:"Cormorant Garamond",serif; font-size:16px; font-weight:300; color:var(--sage); min-width:22px; }
+.dist-num { color:var(--sage); margin-right:4px; }
 </style>
 </head>
 <body>
@@ -806,15 +811,39 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
     <div class="section-num">02</div>
     <h2>En el corazón de <em>Valencia</em></h2>
     <p class="lead" style="margin-top:16px;">C/ Ramón Ferrando, 5 · Paterna. Un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.</p>
+
+    <div class="loc-group-title">Conexiones</div>
     <div class="distances">
-      <div class="dist-item"><span>Centro Valencia</span><span class="dist-time">20 min</span></div>
-      <div class="dist-item"><span>Aeropuerto VLC</span><span class="dist-time">15 min</span></div>
-      <div class="dist-item"><span>Hospital Arnau de Vilanova</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span>Nou Mestalla</span><span class="dist-time">15 min</span></div>
-      <div class="dist-item"><span>Feria Valencia</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span>Campus UV Burjassot</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span>Metro Paterna (L2)</span><span class="dist-time">5 min</span></div>
-      <div class="dist-item"><span>Playa Malvarrosa</span><span class="dist-time">30 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Nou Mestalla</span><span class="dist-time">15 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Hospital Arnau de Vilanova</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Palacio de Congresos</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Campus UV Burjassot</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Feria Valencia</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> À Punt Media</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Polígono Fuente del Jarro</span><span class="dist-time">10 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Centro Valencia</span><span class="dist-time">20 min · 30 min metro L2</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Aeropuerto VLC</span><span class="dist-time">15 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Valencia-Joaquín Sorolla</span><span class="dist-time">20 min</span></div>
+      <div class="dist-item"><span><span class="dist-num">—</span> Playa Malvarrosa</span><span class="dist-time">30 min</span></div>
+    </div>
+
+    <div class="loc-group-title" style="margin-top:28px;">Cerca de ti</div>
+    <div class="nearby-grid">
+      <div class="nearby-item"><span class="nearby-num">01</span><span>Supermercado Charter</span></div>
+      <div class="nearby-item"><span class="nearby-num">02</span><span>Gran Teatro A. Ferrandis</span></div>
+      <div class="nearby-item"><span class="nearby-num">03</span><span>Mercadona</span></div>
+      <div class="nearby-item"><span class="nearby-num">04</span><span>CEIP Miguel de Cervantes</span></div>
+      <div class="nearby-item"><span class="nearby-num">05</span><span>Ayuntamiento de Paterna</span></div>
+      <div class="nearby-item"><span class="nearby-num">06</span><span>CEIP Clara Campoamor</span></div>
+      <div class="nearby-item"><span class="nearby-num">07</span><span>Metro Paterna</span></div>
+      <div class="nearby-item"><span class="nearby-num">08</span><span>Plaza Mayor</span></div>
+      <div class="nearby-item"><span class="nearby-num">09</span><span>Torre de Paterna</span></div>
+      <div class="nearby-item"><span class="nearby-num">10</span><span>Cuevas de Paterna</span></div>
+      <div class="nearby-item"><span class="nearby-num">11</span><span>Biblioteca La Cova Gran</span></div>
+      <div class="nearby-item"><span class="nearby-num">12</span><span>Centro de Salud Clot de Joan</span></div>
+      <div class="nearby-item"><span class="nearby-num">13</span><span>Auditorio Antonio Cabeza</span></div>
+      <div class="nearby-item"><span class="nearby-num">14</span><span>Mercadona</span></div>
+      <div class="nearby-item"><span class="nearby-num">15</span><span>Campo Paterna C.F.</span></div>
     </div>
   </div>
 </section>
