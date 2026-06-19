@@ -809,31 +809,39 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 </section>
 
 <!-- LOCATION -->
-<section class="location" id="ubicacion">
-  <div class="location-map">
-    <img src="map_local.jpg" alt="Mapa" style="width:100%; height:auto; display:block; object-fit:contain;">
-  </div>
-  <div class="location-text reveal">
-    <div class="section-num">02</div>
-    <h2>En el corazón de <em>Valencia</em></h2>
-    <p class="lead" style="margin-top:16px;">C/ Ramón Ferrando, 5 · Paterna. Un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.</p>
+<section id="ubicacion">
 
-    <div class="loc-group-title">Conexiones</div>
-    <div class="distances">
-      <div class="dist-item"><span><span class="dist-num">—</span> Nou Mestalla</span><span class="dist-time">15 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Hospital Arnau de Vilanova</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Palacio de Congresos</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Campus UV Burjassot</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Feria Valencia</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> À Punt Media</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Polígono Fuente del Jarro</span><span class="dist-time">10 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Centro Valencia</span><span class="dist-time">20 min · 30 min metro L2</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Aeropuerto VLC</span><span class="dist-time">15 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Valencia-Joaquín Sorolla</span><span class="dist-time">20 min</span></div>
-      <div class="dist-item"><span><span class="dist-num">—</span> Playa Malvarrosa</span><span class="dist-time">30 min</span></div>
+  <!-- BLOQUE 1: mapa aéreo izq + conexiones der (como en el PDF) -->
+  <div style="display:grid; grid-template-columns:1.3fr 1fr; min-height:600px;">
+    <div style="background:url('map_aerial.jpg') center center/cover no-repeat;"></div>
+    <div style="padding:60px 48px; display:flex; flex-direction:column; justify-content:center; background:var(--cream);">
+      <div class="section-num">02</div>
+      <h2>En el corazón de <em>Valencia</em></h2>
+      <p class="lead" style="margin-top:16px;">C/ Ramón Ferrando, 5 · Paterna. Un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.</p>
+      <div class="distances" style="margin-top:24px;">
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">01</b> &nbsp;Nou Mestalla</span><span class="dist-time">15 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">02</b> &nbsp;Hospital Arnau de Vilanova</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">03</b> &nbsp;Palacio de Congresos</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">04</b> &nbsp;Campus UV Burjassot</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">05</b> &nbsp;Feria Valencia</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">06</b> &nbsp;À Punt Media</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span><b style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sage);font-weight:300;">07</b> &nbsp;Polígono Fuente del Jarro</span><span class="dist-time">10 min</span></div>
+        <div class="dist-item"><span>Centro Valencia</span><span class="dist-time">20 min · L2 30 min</span></div>
+        <div class="dist-item"><span>Aeropuerto VLC</span><span class="dist-time">15 min</span></div>
+        <div class="dist-item"><span>Valencia-Joaquín Sorolla</span><span class="dist-time">20 min</span></div>
+        <div class="dist-item"><span>Playa Malvarrosa</span><span class="dist-time">30 min</span></div>
+      </div>
     </div>
+  </div>
 
-    <div class="loc-group-title" style="margin-top:28px;">Cerca de ti</div>
+  <!-- BLOQUE 2: mapa local con 15 puntos a ancho completo -->
+  <div style="width:100%; overflow:hidden; line-height:0;">
+    <img src="map_local.jpg" alt="Mapa servicios cercanos" style="width:100%; height:auto; display:block;">
+  </div>
+
+  <!-- BLOQUE 3: leyenda 15 puntos -->
+  <div style="background:var(--cream); padding:48px 60px;">
+    <div class="loc-group-title" style="margin-bottom:20px;">Cerca de ti</div>
     <div class="nearby-grid">
       <div class="nearby-item"><span class="nearby-num">01</span><span>Supermercado Charter</span></div>
       <div class="nearby-item"><span class="nearby-num">02</span><span>Gran Teatro A. Ferrandis</span></div>
@@ -852,13 +860,8 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       <div class="nearby-item"><span class="nearby-num">15</span><span>Campo Paterna C.F.</span></div>
     </div>
   </div>
+
 </section>
-
-
-<!-- AERIAL -->
-<div style="width:100%; aspect-ratio:1440/657; overflow:hidden; position:relative;">
-  <img src="map_aerial.jpg" alt="Vista aérea conexiones regionales" style="width:100%; height:100%; object-fit:cover; display:block;">
-</div>
 
 <!-- QUIENES -->
 <section class="quienes" id="quienes">
