@@ -813,7 +813,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
   <!-- BLOQUE 1: mapa aéreo izq + conexiones der (como en el PDF) -->
   <div style="display:grid; grid-template-columns:1.3fr 1fr; min-height:600px;">
-    <div style="background:url('map_aerial.jpg') center center/cover no-repeat;"></div>
+    <div style="overflow:hidden; min-height:600px;"><img src="map_aerial.jpg" alt="Mapa conexiones" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
     <div style="padding:60px 48px; display:flex; flex-direction:column; justify-content:center; background:var(--cream);">
       <div class="section-num">02</div>
       <h2>En el corazón de <em>Valencia</em></h2>
