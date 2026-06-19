@@ -37,7 +37,7 @@ nav.scrolled .nav-links a { color:var(--charcoal); }
 .hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.5vw,26px); font-weight:300; font-style:italic; opacity:.8; margin-bottom:40px; }
 .hero-badge { display:inline-block; border:1px solid rgba(255,255,255,.45); padding:9px 22px; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:50px; }
 .hero-logos { display:flex; gap:20px; align-items:center; }
-.hero-logos img { height:32px; object-fit:contain; opacity:.9; mix-blend-mode: lighten; }
+.hero-logos img { height:48px; object-fit:contain; } .hero-logos img.logo-bauer { background:rgba(255,255,255,0); border-radius:3px; padding:2px; }
 .hero-logos .sep { width:1px; height:26px; background:rgba(255,255,255,.3); }
 .hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.55); font-size:10px; letter-spacing:.15em; text-transform:uppercase; animation:fadeIn 1.5s 1s both; }
 .hero-scroll-line { width:1px; height:40px; background:rgba(255,255,255,.4); }
@@ -75,7 +75,7 @@ h2 em { font-style:italic; color:var(--stone); }
 .stat-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mid); }
 
 /* GALLERY */
-.gallery { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:320px 320px; gap:4px; }
+.gallery { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:320px 320px 320px; gap:4px; }
 .gallery-item { overflow:hidden; }
 .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s; display:block; }
 .gallery-item:hover img { transform:scale(1.04); }
@@ -148,7 +148,7 @@ h2 em { font-style:italic; color:var(--stone); }
 .quienes { display:grid; grid-template-columns:1fr 1fr; gap:80px; padding:100px 60px; background:#EDE8DE; }
 .quienes-right { display:flex; flex-direction:column; gap:28px; }
 .partner-card { padding:32px; background:var(--sage); border-left:3px solid rgba(255,255,255,.3); }
-.partner-logo { height:36px; margin-bottom:14px; display:block; object-fit:contain; object-position:left; filter:brightness(0) invert(1); opacity:.9; }
+.partner-logo { height:40px; margin-bottom:14px; display:block; object-fit:contain; object-position:left; filter:brightness(0) invert(1); opacity:.95; }
 .partner-text { font-size:14px; color:rgba(255,255,255,.82); line-height:1.7; }
 
 /* CTA */
@@ -167,7 +167,7 @@ h2 em { font-style:italic; color:var(--stone); }
 .disclaimer { background:var(--charcoal); border-top:1px solid rgba(255,255,255,.08); padding:28px 60px; font-size:10.5px; color:rgba(255,255,255,.28); line-height:1.7; }
 footer { background:var(--charcoal); color:rgba(255,255,255,.4); padding:40px 60px; font-size:11px; line-height:1.8; display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap; }
 .footer-logos { display:flex; gap:24px; align-items:center; }
-.footer-logos img { height:32px; object-fit:contain; opacity:.65; }
+.footer-logos img { height:44px; object-fit:contain; opacity:.85; }
 .footer-logos .sep { width:1px; height:24px; background:rgba(255,255,255,.2); }
 footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
@@ -201,6 +201,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 .nearby-item { display:flex; align-items:baseline; gap:8px; font-size:13px; color:var(--charcoal); padding:4px 0; }
 .nearby-num { font-family:"Cormorant Garamond",serif; font-size:16px; font-weight:300; color:var(--sage); min-width:22px; }
 .dist-num { color:var(--sage); margin-right:4px; }
+.aerial-legend { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(42,42,42,.55); color:rgba(255,255,255,.8); font-size:10px; letter-spacing:.18em; text-transform:uppercase; padding:8px 20px; white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -234,7 +235,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
       <div class="sep"></div>
       <img src="logo_horizon.png" alt="Grupo Horizon Terra">
       <div class="sep"></div>
-      <img src="logo_bauer.png" alt="Bauer Capital Group">
+      <img src="logo_bauer_white.png" alt="Bauer Capital Group">
     </div>
   </div>
   <div class="hero-scroll">
@@ -278,9 +279,10 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 <!-- GALLERY -->
 <div class="gallery">
   <div class="gallery-item large"><img src="exterior.jpg" alt="Fachada exterior"></div>
-  <div class="gallery-item"><img src="interior1.jpg" alt="Interior cocina"></div>
-  <div class="gallery-item"><img src="interior3.jpg" alt="Interior salón"></div>
-  <div class="gallery-item"><img src="interior2.jpg" alt="Interior salón-comedor"></div>
+  <div class="gallery-item"><img src="interior1.jpg" alt="Interior"></div>
+  <div class="gallery-item"><img src="interior3.jpg" alt="Interior"></div>
+  <div class="gallery-item"><img src="interior2.jpg" alt="Interior"></div>
+  <div class="gallery-item large"><img src="interior1.jpg" alt="Interior salón"></div>
 </div>
 
 <!-- FEATURES -->
@@ -850,8 +852,9 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 </section>
 
 <!-- AERIAL -->
-<div class="aerial reveal">
+<div class="aerial reveal" style="position:relative;">
   <img src="map_aerial.jpg" alt="Vista aérea de Paterna y entorno">
+  <div class="aerial-legend">Vista aérea de Paterna · Ubicación Residencial Torre Jardín</div>
 </div>
 
 <!-- QUIENES -->
@@ -899,7 +902,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
     <div class="sep"></div>
     <img src="logo_horizon.png" alt="Grupo Horizon Terra">
     <div class="sep"></div>
-    <img src="logo_bauer.png" alt="Bauer Capital Group">
+    <img src="logo_bauer_white.png" alt="Bauer Capital Group">
   </div>
   <div style="text-align:right;">
     Residencial Torre Jardín · C/ Ramón Ferrando, 5 · Paterna, Valencia<br>
