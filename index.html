@@ -147,9 +147,9 @@ h2 em { font-style:italic; color:var(--stone); }
 /* QUIENES */
 .quienes { display:grid; grid-template-columns:1fr 1fr; gap:80px; padding:100px 60px; background:#EDE8DE; }
 .quienes-right { display:flex; flex-direction:column; gap:28px; }
-.partner-card { padding:32px; background:rgba(255,255,255,0.12); border-left:3px solid rgba(255,255,255,.5); }
-.partner-logo { height:40px; margin-bottom:14px; display:block; object-fit:contain; object-position:left; opacity:1; }
-.partner-text { font-size:14px; color:rgba(255,255,255,.9); line-height:1.7; }
+.partner-card { padding:32px; background:var(--sage); border-left:3px solid rgba(255,255,255,.4); }
+.partner-logo { height:40px; margin-bottom:14px; display:block; object-fit:contain; object-position:left; opacity:1; filter:brightness(0) invert(1); }
+.partner-text { font-size:14px; color:rgba(255,255,255,.85); line-height:1.7; }
 
 /* CTA */
 .cta-section { background:var(--sage); color:var(--white); text-align:center; padding:100px 60px; }
@@ -231,9 +231,9 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
     <p class="hero-sub">Un hogar diseñado para inspirar</p>
     <div class="hero-badge">13 Viviendas Exclusivas</div>
     <div class="hero-logos">
-      <img src="logo_villegas.png" alt="Grupo Villegas">
+      <img src="logo_villegas.png" alt="Grupo Villegas" style="mix-blend-mode:lighten;">
       <div class="sep"></div>
-      <img src="logo_horizon.png" alt="Grupo Horizon Terra">
+      <img src="logo_horizon.png" alt="Grupo Horizon Terra" style="mix-blend-mode:lighten;">
       <div class="sep"></div>
       <img src="logo_bauer_white.png" alt="Bauer Capital Group" style="height:72px;">
     </div>
