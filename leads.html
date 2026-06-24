@@ -69,7 +69,8 @@
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
   /* SUBSTATUS */
-  .substatus-select { font-size: 11px; letter-spacing: .08em; font-family: 'Inter', sans-serif; border: 1.5px solid var(--border); background: var(--white); color: var(--mid); padding: 4px 10px; border-radius: 2px; cursor: pointer; outline: none; transition: border .2s; }
+  .delete-btn { width:28px; height:28px; border-radius:2px; border:1.5px solid rgba(176,112,112,.3); background:transparent; color:#B07070; cursor:pointer; font-size:14px; display:inline-flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+  .delete-btn:hover { background:#B07070; color:white; border-color:#B07070; }
   .substatus-select:focus { border-color: var(--sage); }
   .substatus-select.enviado { border-color: #7B9E82; color: #7B9E82; background: rgba(123,158,130,.08); }
   .substatus-select.proceso { border-color: #C4A45A; color: #C4A45A; background: rgba(196,164,90,.08); }
@@ -142,6 +143,7 @@
           <th>Teléfono</th>
           <th>Fecha</th>
           <th>Estado</th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="leadsBody"></tbody>
@@ -240,6 +242,7 @@ function renderTable() {
           <option value="no-interesa" ${l.substatus === 'no-interesa' ? 'selected' : ''}>No le interesa</option>
         </select>` : ''}
       </td>
+      <td><button class="delete-btn" onclick="deleteLead('${l.id}', '${l.nombre || ''}')" title="Eliminar lead">✕</button></td>
     </tr>`;
   }).join('');
 }
@@ -292,6 +295,22 @@ async function updateSubstatus(id, substatus) {
       showToast('✓ Sub-estado actualizado');
     }
   } catch(e) { showToast('Error al actualizar'); }
+}
+
+async function deleteLead(id, nombre) {
+  if (!confirm(`¿Eliminar el lead de ${nombre || 'este contacto'}? Esta acción no se puede deshacer.`)) return;
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/leads?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+    });
+    if (res.ok) {
+      allLeads = allLeads.filter(l => l.id !== id);
+      updateStats();
+      renderTable();
+      showToast('Lead eliminado');
+    }
+  } catch(e) { showToast('Error al eliminar'); }
 }
 
 function showToast(msg) {
