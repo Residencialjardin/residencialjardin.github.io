@@ -36,9 +36,8 @@ nav.scrolled .nav-links a { color:var(--charcoal); }
 .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(50px,7vw,92px); font-weight:300; line-height:1; margin-bottom:14px; }
 .hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.5vw,26px); font-weight:300; font-style:italic; opacity:.8; margin-bottom:40px; }
 .hero-badge { display:inline-block; border:1px solid rgba(255,255,255,.45); padding:9px 22px; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:50px; }
-.hero-logos { display:flex; gap:24px; align-items:center; }
+.hero-logos { display:flex; gap:40px; align-items:center; }
 .hero-logos img { height:44px; object-fit:contain; } .hero-logos img.logo-bauer { background:rgba(255,255,255,0); border-radius:3px; padding:2px; }
-.hero-logos .sep { width:1px; height:36px; background:rgba(255,255,255,.3); }
 .hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.55); font-size:10px; letter-spacing:.15em; text-transform:uppercase; animation:fadeIn 1.5s 1s both; }
 .hero-scroll-line { width:1px; height:40px; background:rgba(255,255,255,.4); }
 @keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
@@ -189,9 +188,8 @@ h2 em { font-style:italic; color:var(--stone); }
 /* DISCLAIMER + FOOTER */
 .disclaimer { background:var(--charcoal); border-top:1px solid rgba(255,255,255,.08); padding:28px 60px; font-size:10.5px; color:rgba(255,255,255,.28); line-height:1.7; }
 footer { background:var(--charcoal); color:rgba(255,255,255,.4); padding:40px 60px; font-size:11px; line-height:1.8; display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap; }
-.footer-logos { display:flex; gap:32px; align-items:center; }
+.footer-logos { display:flex; gap:48px; align-items:center; }
 .footer-logos img { height:44px; object-fit:contain; opacity:.85; }
-.footer-logos .sep { width:1px; height:36px; background:rgba(255,255,255,.2); }
 footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 
 /* RESPONSIVE */
@@ -258,9 +256,7 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
     <div class="hero-badge">13 Viviendas Exclusivas</div>
     <div class="hero-logos">
       <img src="logo_villegas.png" alt="Grupo Villegas" style="height:110px;">
-      <div class="sep"></div>
       <img src="logo_bauer_white.png" alt="Bauer Capital Group" class="logo-bauer">
-      <div class="sep"></div>
       <img src="logo_horizon.png" alt="Grupo Horizon Terra">
     </div>
   </div>
@@ -1009,17 +1005,48 @@ function toggleViv(header) {
   if (!isOpen) item.classList.add('open');
 }
 
-function enviarFormulario() {
+const SUPA_URL = 'https://ouvlcuzafcpxbliwxoyd.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91dmxjdXphZmNweGJsaXd4b3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMTQ4NTcsImV4cCI6MjA5Nzg5MDg1N30.P3BiXuv3l-riL0QboYqicK5DrwOHTKgzh0u0TmtyqyA';
+
+async function enviarFormulario() {
   const nombre = document.getElementById('mNombre').value.trim();
   const email = document.getElementById('mEmail').value.trim();
   if (!nombre || !email) { alert('Por favor completa al menos nombre y email.'); return; }
-  const asunto = encodeURIComponent('Solicitud de información – Residencial Torre Jardín');
   const apellido = document.getElementById('mApellido').value.trim();
-  const tel = document.getElementById('mTel').value.trim();
-  const cuerpo = encodeURIComponent(`Nombre: ${nombre} ${apellido}\nEmail: ${email}\nTeléfono: ${tel}`);
-  window.location.href = `mailto:info@residencialtorrejardin.com?subject=${asunto}&body=${cuerpo}`;
-  document.getElementById('modalForm').style.display = 'none';
-  document.getElementById('modalOk').style.display = 'block';
+  const telefono = document.getElementById('mTel').value.trim();
+
+  const btn = document.querySelector('.modal-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ nombre, apellido, email, telefono })
+    });
+
+    if (res.ok) {
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalOk').style.display = 'block';
+    } else {
+      const err = await res.text();
+      console.error('Supabase error:', err);
+      alert('Hubo un error al enviar. Por favor intenta de nuevo.');
+      btn.textContent = 'Enviar solicitud';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    console.error(e);
+    alert('Error de conexión. Por favor intenta de nuevo.');
+    btn.textContent = 'Enviar solicitud';
+    btn.disabled = false;
+  }
 }
 
 // Cerrar modal con Escape o click fuera
