@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads · Residencial Torre Jardín</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EDE4;
+    --sage: #7B9E82;
+    --sage-lt: #A8C2A8;
+    --stone: #C4B49A;
+    --charcoal: #2A2A2A;
+    --mid: #6B6B6B;
+    --white: #ffffff;
+    --bg: #F7F4EF;
+    --border: #E2DDD6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--charcoal); font-size: 14px; min-height: 100vh; }
+
+  /* HEADER */
+  header { background: var(--charcoal); padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; }
+  .header-brand { display: flex; flex-direction: column; gap: 2px; }
+  .header-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); letter-spacing: .02em; }
+  .header-sub { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sage-lt); }
+  .header-badge { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  /* MAIN */
+  main { max-width: 1200px; margin: 0 auto; padding: 48px 32px; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .stat-card { background: var(--white); border: 1px solid var(--border); padding: 24px 28px; border-radius: 2px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--charcoal); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mid); }
+  .stat-card.highlight .stat-num { color: var(--sage); }
+
+  /* TOOLBAR */
+  .toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+  .toolbar-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--charcoal); margin-right: auto; }
+  .filter-btn { padding: 8px 20px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-family: 'Inter', sans-serif; border: 1.5px solid var(--border); background: var(--white); color: var(--mid); cursor: pointer; border-radius: 2px; transition: all .2s; }
+  .filter-btn.active { background: var(--sage); border-color: var(--sage); color: var(--white); }
+  .filter-btn:hover:not(.active) { border-color: var(--sage); color: var(--sage); }
+  .search-input { padding: 8px 16px; font-size: 13px; font-family: 'Inter', sans-serif; border: 1.5px solid var(--border); background: var(--white); color: var(--charcoal); border-radius: 2px; width: 220px; outline: none; transition: border .2s; }
+  .search-input:focus { border-color: var(--sage); }
+
+  /* TABLE */
+  .table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--charcoal); }
+  thead th { padding: 14px 20px; text-align: left; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 500; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #FAFAF8; }
+  tbody td { padding: 16px 20px; font-size: 13px; color: var(--charcoal); vertical-align: middle; }
+  .td-name { font-weight: 500; }
+  .td-date { color: var(--mid); font-size: 12px; }
+  .td-email a { color: var(--sage); text-decoration: none; }
+  .td-email a:hover { text-decoration: underline; }
+
+  /* STATUS BADGE */
+  .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 2px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all .2s; }
+  .status-badge.pendiente { background: rgba(196,180,154,.2); color: #8A7560; }
+  .status-badge.pendiente:hover { background: rgba(196,180,154,.35); }
+  .status-badge.gestionado { background: rgba(123,158,130,.15); color: var(--sage); }
+  .status-badge.gestionado:hover { background: rgba(123,158,130,.25); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* SUBSTATUS */
+  .substatus-select { font-size: 11px; letter-spacing: .08em; font-family: 'Inter', sans-serif; border: 1.5px solid var(--border); background: var(--white); color: var(--mid); padding: 4px 10px; border-radius: 2px; cursor: pointer; outline: none; transition: border .2s; }
+  .substatus-select:focus { border-color: var(--sage); }
+  .substatus-select.enviado { border-color: #7B9E82; color: #7B9E82; background: rgba(123,158,130,.08); }
+  .substatus-select.proceso { border-color: #C4A45A; color: #C4A45A; background: rgba(196,164,90,.08); }
+  .substatus-select.no-interesa { border-color: #B07070; color: #B07070; background: rgba(176,112,112,.08); }
+
+  /* EMPTY */
+  .empty { text-align: center; padding: 80px 20px; }
+  .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: .3; }
+  .empty-text { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--mid); margin-bottom: 8px; }
+  .empty-sub { font-size: 12px; color: var(--mid); opacity: .7; }
+
+  /* LOADING */
+  .loading { text-align: center; padding: 60px; color: var(--mid); font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 32px; right: 32px; background: var(--charcoal); color: var(--white); padding: 14px 24px; border-radius: 2px; font-size: 13px; opacity: 0; transform: translateY(10px); transition: all .3s; pointer-events: none; z-index: 999; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { border-left: 3px solid var(--sage); }
+
+  /* REFRESH BTN */
+  .refresh-btn { padding: 8px 20px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-family: 'Inter', sans-serif; border: 1.5px solid var(--sage); background: transparent; color: var(--sage); cursor: pointer; border-radius: 2px; transition: all .2s; }
+  .refresh-btn:hover { background: var(--sage); color: var(--white); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <span class="header-title">Residencial Torre Jardín</span>
+    <span class="header-sub">Panel de Leads</span>
+  </div>
+  <span class="header-badge" id="lastUpdate"></span>
+</header>
+
+<main>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num" id="statTotal">—</div>
+      <div class="stat-label">Total leads</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statPendiente">—</div>
+      <div class="stat-label">Sin gestionar</div>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-num" id="statGestionado">—</div>
+      <div class="stat-label">Gestionados</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <span class="toolbar-title">Contactos</span>
+    <input class="search-input" type="text" id="searchInput" placeholder="Buscar por nombre o email…" oninput="renderTable()">
+    <button class="filter-btn active" id="f-todos" onclick="setFilter('todos')">Todos</button>
+    <button class="filter-btn" id="f-pendiente" onclick="setFilter('pendiente')">Sin gestionar</button>
+    <button class="filter-btn" id="f-gestionado" onclick="setFilter('gestionado')">Gestionados</button>
+    <button class="refresh-btn" onclick="loadLeads()">↻ Actualizar</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <div class="loading" id="loadingMsg">Cargando leads…</div>
+    <table id="leadsTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="leadsBody"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" style="display:none;">
+      <div class="empty-icon">📋</div>
+      <div class="empty-text">No hay leads</div>
+      <div class="empty-sub">Aún no hay contactos con este filtro</div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPA_URL = 'https://ouvlcuzafcpxbliwxoyd.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91dmxjdXphZmNweGJsaXd4b3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMTQ4NTcsImV4cCI6MjA5Nzg5MDg1N30.P3BiXuv3l-riL0QboYqicK5DrwOHTKgzh0u0TmtyqyA';
+
+let allLeads = [];
+let currentFilter = 'todos';
+
+async function loadLeads() {
+  document.getElementById('loadingMsg').style.display = 'block';
+  document.getElementById('leadsTable').style.display = 'none';
+  document.getElementById('emptyMsg').style.display = 'none';
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/leads?select=*&order=created_at.desc`, {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+    });
+    allLeads = await res.json();
+    document.getElementById('lastUpdate').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+    updateStats();
+    renderTable();
+  } catch(e) {
+    document.getElementById('loadingMsg').textContent = 'Error al cargar. Intenta de nuevo.';
+  }
+}
+
+function updateStats() {
+  const pendiente = allLeads.filter(l => !l.status || l.status === 'pendiente').length;
+  const gestionado = allLeads.filter(l => l.status === 'gestionado').length;
+  document.getElementById('statTotal').textContent = allLeads.length;
+  document.getElementById('statPendiente').textContent = pendiente;
+  document.getElementById('statGestionado').textContent = gestionado;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('f-' + f).classList.add('active');
+  renderTable();
+}
+
+function renderTable() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  let filtered = allLeads.filter(l => {
+    const matchFilter = currentFilter === 'todos' || (currentFilter === 'pendiente' ? (!l.status || l.status === 'pendiente') : l.status === currentFilter);
+    const matchSearch = !search || 
+      (l.nombre || '').toLowerCase().includes(search) || 
+      (l.apellido || '').toLowerCase().includes(search) ||
+      (l.email || '').toLowerCase().includes(search);
+    return matchFilter && matchSearch;
+  });
+
+  document.getElementById('loadingMsg').style.display = 'none';
+
+  if (filtered.length === 0) {
+    document.getElementById('leadsTable').style.display = 'none';
+    document.getElementById('emptyMsg').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('emptyMsg').style.display = 'none';
+  document.getElementById('leadsTable').style.display = 'table';
+
+  const tbody = document.getElementById('leadsBody');
+  tbody.innerHTML = filtered.map(l => {
+    const status = l.status || 'pendiente';
+    const fecha = new Date(l.created_at).toLocaleDateString('es-ES', {day:'2-digit', month:'short', year:'numeric'});
+    const hora = new Date(l.created_at).toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+    return `<tr>
+      <td class="td-name">${l.nombre || '—'} ${l.apellido || ''}</td>
+      <td class="td-email"><a href="mailto:${l.email}">${l.email || '—'}</a></td>
+      <td>${l.telefono || '—'}</td>
+      <td class="td-date">${fecha} · ${hora}</td>
+      <td style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button class="status-badge ${status}" onclick="toggleStatus('${l.id}', '${status}')">
+          <span class="status-dot"></span>
+          ${status === 'gestionado' ? 'Gestionado' : 'Sin gestionar'}
+        </button>
+        ${status === 'gestionado' ? `<select class="substatus-select ${getSubstatusClass(l.substatus)}" onchange="updateSubstatus('${l.id}', this.value)">
+          <option value="">Sub-estado…</option>
+          <option value="enviado" ${l.substatus === 'enviado' ? 'selected' : ''}>Enviar información</option>
+          <option value="proceso" ${l.substatus === 'proceso' ? 'selected' : ''}>En proceso</option>
+          <option value="no-interesa" ${l.substatus === 'no-interesa' ? 'selected' : ''}>No le interesa</option>
+        </select>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function toggleStatus(id, current) {
+  const newStatus = current === 'gestionado' ? 'pendiente' : 'gestionado';
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/leads?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (res.ok) {
+      const lead = allLeads.find(l => l.id === id);
+      if (lead) lead.status = newStatus;
+      updateStats();
+      renderTable();
+      showToast(newStatus === 'gestionado' ? '✓ Marcado como gestionado' : 'Marcado como sin gestionar');
+    }
+  } catch(e) { showToast('Error al actualizar'); }
+}
+
+function getSubstatusClass(sub) {
+  if (sub === 'enviado') return 'enviado';
+  if (sub === 'proceso') return 'proceso';
+  if (sub === 'no-interesa') return 'no-interesa';
+  return '';
+}
+
+async function updateSubstatus(id, substatus) {
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/leads?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ substatus: substatus || null })
+    });
+    if (res.ok) {
+      const lead = allLeads.find(l => l.id === id);
+      if (lead) lead.substatus = substatus;
+      showToast('✓ Sub-estado actualizado');
+    }
+  } catch(e) { showToast('Error al actualizar'); }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast success show';
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Iniciar
+loadLeads();
+</script>
+</body>
+</html>
