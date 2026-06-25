@@ -24,6 +24,10 @@ nav.scrolled { background:rgba(242,237,228,0.95); backdrop-filter:blur(10px); bo
 nav.scrolled .nav-links a { color:var(--charcoal); }
 .nav-links a:hover { opacity:.7; }
 .nav-cta { background:var(--sage); color:var(--white)!important; padding:9px 24px; border-radius:2px; }
+.lang-btn { background:none; border:1.5px solid rgba(255,255,255,.4); color:rgba(255,255,255,.85); font-family:'Inter',sans-serif; font-size:10px; letter-spacing:.15em; padding:6px 12px; cursor:pointer; border-radius:2px; transition:all .2s; }
+.lang-btn:hover { border-color:white; color:white; }
+nav.scrolled .lang-btn { border-color:rgba(42,42,42,.3); color:var(--charcoal); }
+nav.scrolled .lang-btn:hover { border-color:var(--sage); color:var(--sage); }
 
 /* HERO */
 .hero { position:relative; height:100vh; min-height:600px; display:flex; align-items:flex-end; overflow:hidden; }
@@ -314,13 +318,14 @@ footer a { color:rgba(255,255,255,.4); text-decoration:none; }
 <nav id="nav">
   <div></div>
   <ul class="nav-links">
-    <li><a href="#intro">El Proyecto</a></li>
-    <li><a href="#ubicacion">Ubicación</a></li>
-    <li><a href="#promo">La Promoción</a></li>
-    <li><a href="#viviendas">Viviendas</a></li>
-    <li><a href="#calidades">Calidades</a></li>
-    <li><a href="#quienes">Quiénes Somos</a></li>
-    <li><a href="#contacto" class="nav-cta" onclick="event.preventDefault();document.getElementById('modalContacto').classList.add('active')">Contactar</a></li>
+    <li><a href="#intro" data-es="El Proyecto" data-en="The Project">El Proyecto</a></li>
+    <li><a href="#ubicacion" data-es="Ubicación" data-en="Location">Ubicación</a></li>
+    <li><a href="#promo" data-es="La Promoción" data-en="The Development">La Promoción</a></li>
+    <li><a href="#viviendas" data-es="Viviendas" data-en="Homes">Viviendas</a></li>
+    <li><a href="#calidades" data-es="Calidades" data-en="Finishes">Calidades</a></li>
+    <li><a href="#quienes" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a></li>
+    <li><a href="#contacto" class="nav-cta" onclick="event.preventDefault();document.getElementById('modalContacto').classList.add('active')" data-es="Contactar" data-en="Contact">Contactar</a></li>
+    <li><button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button></li>
   </ul>
 </nav>
 
@@ -1139,6 +1144,246 @@ document.getElementById('modalContacto').addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') document.getElementById('modalContacto').classList.remove('active');
 });
+</script>
+<script>
+const translations = {
+  es: {
+    // META
+    pageTitle: 'Residencial Torre Jardín · Paterna',
+    // HERO
+    heroEyebrow: 'Promoción de Obra Nueva · Paterna, Valencia',
+    heroSub: 'Un hogar diseñado para inspirar',
+    heroBadge: '13 Viviendas Exclusivas',
+    // INTRO
+    introTitle: 'Un hogar diseñado para <em>inspirar</em>',
+    introP1: 'Residencial Torre Jardín nace de la fusión entre la calidez del diseño nórdico y la luminosidad mediterránea. Cada vivienda ha sido concebida con atención milimétrica al detalle, materiales nobles y espacios que invitan a vivir.',
+    introP2: 'La selección de materiales, texturas y acabados contribuye a generar una atmósfera cálida y atemporal, donde la sencillez se convierte en un valor diferencial. Un proyecto concebido para que el hogar sea, ante todo, un lugar donde sentirse bien.',
+    // UBICACION
+    ubicTitle: 'En el corazón de <em>Valencia</em>',
+    ubicLead: 'C/ Ramón Ferrando, 5 · Paterna. Un barrio consolidado con todos los servicios al alcance y excelentes conexiones a Valencia y el aeropuerto.',
+    cercaDeTi: 'Cerca de ti',
+    // PROMO
+    promoTitle: 'Un edificio pensado para <em>sentirse en casa</em>',
+    promoP1: 'Una promoción de obra nueva en el corazón de Paterna, diseñada para ofrecer hogares cómodos, funcionales y adaptados a las necesidades de la vida actual. Arquitectura de líneas sencillas integrada en su entorno.',
+    promoP2: '13 viviendas exclusivas, entre estudios y viviendas de dos dormitorios, creando un ambiente residencial tranquilo y cercano. Sus acabados de primera calidad aportan confort y funcionalidad a cada espacio.',
+    statViviendas: 'Viviendas', statPlantas: 'Plantas + Ático', statEfic: 'Eficiencia',
+    // FEATURES
+    featTitle: 'Calidad, luz y bienestar <em>para tu día a día</em>',
+    featEyebrow: 'Tu Casa',
+    feat1Title: 'Terraza Propia', feat1Desc: 'Todas las viviendas disponen de terraza o balcón con carpintería en verde salvia.',
+    feat2Title: 'Luz Natural', feat2Desc: 'Amplios ventanales de suelo a techo para maximizar la luminosidad en cada estancia.',
+    feat3Title: 'Calidad Premium', feat3Desc: 'Electrodomésticos integrados, cocina equipada y acabados de primera calidad.',
+    feat4Title: 'Eficiencia A+', feat4Desc: 'Aislamiento de alta prestación y domótica para un hogar sostenible y económico.',
+    // VIVIENDAS
+    vivTitle: 'Encuentra tu <em>espacio ideal</em>',
+    vivLead: '13 viviendas exclusivas distribuidas en 4 estudios, 7 viviendas de 2 dormitorios y 2 áticos de 2 dormitorios. Haz clic en cada vivienda para ver el plano y los detalles completos.',
+    tabEstudios: 'Estudios (4)', tabDosDorm: '2 Dormitorios (7)', tabAticos: 'Áticos (2)',
+    tipoEstudio: 'Estudio', tipoAtico: 'Ático · 2 Dormitorios', tipo2dorm: '2 Dormitorios',
+    consultarPrecio: 'Consultar precio', consultar: 'Consultar',
+    supUtil: 'Sup. útil', supConst: 'Sup. construida', planta: 'Planta',
+    distribucion: 'Distribución', precio: 'Precio', solicitarInfo: 'Solicitar información',
+    plantaBaja: 'Planta Baja', plantaAtico: 'Planta Ático',
+    // QUIENES
+    quiTitle: '¿Quiénes <em>somos?</em>',
+    quiP1: 'Esta promoción nace de la unión de dos grupos con sólida trayectoria y visión compartida: crear proyectos inmobiliarios de alto valor, concebidos para las personas y desarrollados con los máximos estándares de calidad, gestión y rentabilidad.',
+    quiP2: 'La combinación de ambas compañías da lugar a una alianza estratégica que integra visión promotora, capacidad de gestión, experiencia constructiva y conocimiento del mercado, garantizando rigor, transparencia y excelencia en todas las etapas.',
+    promotores: 'Promotores', arquitectura: 'Arquitectura',
+    horizonText: 'Grupo Horizon Terra aporta experiencia en el desarrollo integral de proyectos residenciales, combinando planificación estratégica, excelencia constructiva y cuidada atención al detalle en cada fase del proceso, desde la selección de la ubicación hasta la entrega final.',
+    villegasText: 'Grupo Villegas cuenta con más de quince años de experiencia en el sector inmobiliario internacional, desarrollando y optimizando inversiones tanto en España como en Argentina, aportando profundo conocimiento del mercado y sólida capacidad de análisis.',
+    // CTA
+    ctaEyebrow: 'Tu Nuevo Hogar Te Espera',
+    ctaTitle: 'Bienvenido a <em>tu nuevo hogar</em>',
+    ctaLead: 'Solicita información sobre disponibilidad, precios y visitas.',
+    // MODAL
+    modalEyebrow: 'Residencial Torre Jardín',
+    modalTitle: 'Déjanos tus datos si quieres tener más información de nuestras promociones',
+    modalSub: 'Nos pondremos en contacto contigo a la mayor brevedad posible.',
+    labelNombre: 'Nombre', labelApellido: 'Apellido', labelEmail: 'Email', labelTel: 'Teléfono',
+    btnEnviar: 'Enviar solicitud', enviando: 'Enviando...',
+    modalOkText: '¡Gracias! Nos pondremos en contacto contigo pronto.',
+    // FOOTER
+    footerAddr: 'Residencial Torre Jardín · C/ Ramón Ferrando, 5 · Paterna, Valencia',
+    // DISCLAIMER
+    disclaimerText: 'Las imágenes, renders y distribuciones mostradas son orientativas y pueden variar respecto al producto final. La información detallada se encuentra en la documentación comercial.',
+  },
+  en: {
+    pageTitle: 'Residencial Torre Jardín · Paterna',
+    heroEyebrow: 'New Development · Paterna, Valencia',
+    heroSub: 'A home designed to inspire',
+    heroBadge: '13 Exclusive Homes',
+    introTitle: 'A home designed to <em>inspire</em>',
+    introP1: 'Residencial Torre Jardín was born from the fusion of Nordic design warmth and Mediterranean light. Every home has been conceived with meticulous attention to detail, quality materials and spaces that invite you to live.',
+    introP2: 'The selection of materials, textures and finishes creates a warm and timeless atmosphere, where simplicity becomes a differentiating value. A project designed so that home is, above all, a place where you feel good.',
+    ubicTitle: 'In the heart of <em>Valencia</em>',
+    ubicLead: 'C/ Ramón Ferrando, 5 · Paterna. A well-established neighbourhood with all amenities within reach and excellent connections to Valencia and the airport.',
+    cercaDeTi: 'Nearby',
+    promoTitle: 'A building designed to <em>feel at home</em>',
+    promoP1: 'A new development in the heart of Paterna, designed to offer comfortable, functional homes adapted to the needs of modern life. Architecture of clean lines integrated into its surroundings.',
+    promoP2: '13 exclusive homes, including studios and two-bedroom apartments, creating a quiet and welcoming residential environment. First-class finishes provide comfort and functionality to every space.',
+    statViviendas: 'Homes', statPlantas: 'Floors + Penthouse', statEfic: 'Efficiency',
+    featTitle: 'Quality, light and wellbeing <em>for your everyday life</em>',
+    featEyebrow: 'Your Home',
+    feat1Title: 'Private Terrace', feat1Desc: 'All homes have a terrace or balcony with sage green joinery.',
+    feat2Title: 'Natural Light', feat2Desc: 'Large floor-to-ceiling windows to maximise light in every room.',
+    feat3Title: 'Premium Quality', feat3Desc: 'Integrated appliances, fully fitted kitchen and top-quality finishes.',
+    feat4Title: 'A+ Efficiency', feat4Desc: 'High-performance insulation and home automation for a sustainable, cost-effective home.',
+    vivTitle: 'Find your <em>ideal space</em>',
+    vivLead: '13 exclusive homes: 4 studios, 7 two-bedroom apartments and 2 two-bedroom penthouses. Click on each home to view the floor plan and full details.',
+    tabEstudios: 'Studios (4)', tabDosDorm: '2 Bedrooms (7)', tabAticos: 'Penthouses (2)',
+    tipoEstudio: 'Studio', tipoAtico: 'Penthouse · 2 Bedrooms', tipo2dorm: '2 Bedrooms',
+    consultarPrecio: 'Price on request', consultar: 'On request',
+    supUtil: 'Usable area', supConst: 'Built area', planta: 'Floor',
+    distribucion: 'Layout', precio: 'Price', solicitarInfo: 'Request information',
+    plantaBaja: 'Ground Floor', plantaAtico: 'Penthouse Floor',
+    quiTitle: 'Who <em>are we?</em>',
+    quiP1: 'This development was born from the union of two groups with solid track records and a shared vision: to create high-value real estate projects, designed for people and developed to the highest standards of quality, management and profitability.',
+    quiP2: 'The combination of both companies gives rise to a strategic alliance that integrates development vision, management capacity, construction experience and market knowledge, ensuring rigour, transparency and excellence at every stage.',
+    promotores: 'Developers', arquitectura: 'Architecture',
+    horizonText: 'Grupo Horizon Terra brings experience in the comprehensive development of residential projects, combining strategic planning, construction excellence and careful attention to detail at every stage of the process, from site selection to final handover.',
+    villegasText: 'Grupo Villegas has over fifteen years of experience in the international real estate sector, developing and optimising investments in both Spain and Argentina, bringing deep market knowledge and solid analytical capacity.',
+    ctaEyebrow: 'Your New Home Awaits',
+    ctaTitle: 'Welcome to <em>your new home</em>',
+    ctaLead: 'Request information on availability, prices and viewings.',
+    modalEyebrow: 'Residencial Torre Jardín',
+    modalTitle: 'Leave your details if you would like more information about our developments',
+    modalSub: 'We will get back to you as soon as possible.',
+    labelNombre: 'First Name', labelApellido: 'Last Name', labelEmail: 'Email', labelTel: 'Phone',
+    btnEnviar: 'Send request', enviando: 'Sending...',
+    modalOkText: 'Thank you! We will be in touch shortly.',
+    footerAddr: 'Residencial Torre Jardín · C/ Ramón Ferrando, 5 · Paterna, Valencia',
+    disclaimerText: 'Images, renders and layouts shown are indicative and may differ from the final product. Full details are available in the commercial documentation.',
+  }
+};
+
+let currentLang = 'es';
+
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+  applyTranslations();
+}
+
+function t(key) { return translations[currentLang][key] || translations['es'][key] || key; }
+
+function applyTranslations() {
+  const lang = currentLang;
+  document.title = t('pageTitle');
+
+  // Nav links
+  document.querySelectorAll('[data-es]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-es');
+  });
+
+  // Hero
+  setText('.hero-eyebrow', t('heroEyebrow'));
+  setHTML('.hero-sub', t('heroSub'));
+  setText('.hero-badge', t('heroBadge'));
+
+  // Intro
+  setHTML('#intro h2', t('introTitle'));
+  const introPs = document.querySelectorAll('#intro .lead');
+  if (introPs[0]) introPs[0].textContent = t('introP1');
+  if (introPs[1]) introPs[1].textContent = t('introP2');
+
+  // Ubicacion
+  setHTML('#ubicacion h2', t('ubicTitle'));
+  const ubicLead = document.querySelector('#ubicacion .lead');
+  if (ubicLead) ubicLead.textContent = t('ubicLead');
+  setText('.loc-group-title', t('cercaDeTi'));
+
+  // Promo
+  setHTML('#promo h2', t('promoTitle'));
+  const promoPs = document.querySelectorAll('#promo .lead');
+  if (promoPs[0]) promoPs[0].textContent = t('promoP1');
+  if (promoPs[1]) promoPs[1].textContent = t('promoP2');
+  const statLabels = document.querySelectorAll('.stat-label');
+  if (statLabels[0]) statLabels[0].textContent = t('statViviendas');
+  if (statLabels[1]) statLabels[1].textContent = t('statPlantas');
+  if (statLabels[2]) statLabels[2].textContent = t('statEfic');
+
+  // Features
+  setText('.features .section-eyebrow', t('featEyebrow'));
+  setHTML('.features h2', t('featTitle'));
+  const featTitles = document.querySelectorAll('.feature-title');
+  const featDescs = document.querySelectorAll('.feature-desc');
+  ['feat1Title','feat2Title','feat3Title','feat4Title'].forEach((k,i) => { if(featTitles[i]) featTitles[i].textContent = t(k); });
+  ['feat1Desc','feat2Desc','feat3Desc','feat4Desc'].forEach((k,i) => { if(featDescs[i]) featDescs[i].textContent = t(k); });
+
+  // Viviendas
+  setHTML('#viviendas h2', t('vivTitle'));
+  const vivLead = document.querySelector('#viviendas .lead');
+  if (vivLead) vivLead.textContent = t('vivLead');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  if (tabBtns[0]) tabBtns[0].textContent = t('tabEstudios');
+  if (tabBtns[1]) tabBtns[1].textContent = t('tabDosDorm');
+  if (tabBtns[2]) tabBtns[2].textContent = t('tabAticos');
+  document.querySelectorAll('.data-label').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt === 'Sup. útil' || txt === 'Usable area') el.textContent = t('supUtil');
+    if (txt === 'Sup. construida' || txt === 'Built area') el.textContent = t('supConst');
+    if (txt === 'Planta' || txt === 'Floor') el.textContent = t('planta');
+  });
+  document.querySelectorAll('.rooms-title').forEach(el => el.textContent = t('distribucion'));
+  document.querySelectorAll('.precio-label').forEach(el => el.textContent = t('precio'));
+  document.querySelectorAll('.vivienda-precio').forEach(el => el.textContent = t('consultarPrecio'));
+  document.querySelectorAll('.precio-val').forEach(el => el.textContent = t('consultar'));
+  document.querySelectorAll('.contactar-btn').forEach(el => el.textContent = t('solicitarInfo'));
+  document.querySelectorAll('.vivienda-tipo').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt === 'Estudio' || txt === 'Studio') el.textContent = t('tipoEstudio');
+    if (txt === 'Ático · 2 Dormitorios' || txt === 'Penthouse · 2 Bedrooms') el.textContent = t('tipoAtico');
+    if (txt === '2 Dormitorios' || txt === '2 Bedrooms') el.textContent = t('tipo2dorm');
+  });
+  document.querySelectorAll('.vivienda-planta').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt === 'Planta Baja' || txt === 'Ground Floor') el.textContent = t('plantaBaja');
+    if (txt === 'Planta Ático' || txt === 'Penthouse Floor') el.textContent = t('plantaAtico');
+  });
+
+  // Quienes
+  setHTML('#quienes h2', t('quiTitle'));
+  const quiPs = document.querySelectorAll('#quienes .lead');
+  if (quiPs[0]) quiPs[0].textContent = t('quiP1');
+  if (quiPs[1]) quiPs[1].textContent = t('quiP2');
+  document.querySelectorAll('#quienes p[style*="letter-spacing"]').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt === 'Promotores' || txt === 'Developers') el.textContent = t('promotores');
+    if (txt === 'Arquitectura' || txt === 'Architecture') el.textContent = t('arquitectura');
+  });
+  const partnerTexts = document.querySelectorAll('.partner-text');
+  if (partnerTexts[0]) partnerTexts[0].textContent = t('horizonText');
+  if (partnerTexts[1]) partnerTexts[1].textContent = t('villegasText');
+
+  // CTA
+  setText('.cta-section .section-eyebrow', t('ctaEyebrow'));
+  setHTML('.cta-section h2', t('ctaTitle'));
+  const ctaP = document.querySelector('.cta-section > p');
+  if (ctaP) ctaP.textContent = t('ctaLead');
+
+  // Modal
+  setText('.modal-eyebrow', t('modalEyebrow'));
+  setText('.modal-title', t('modalTitle'));
+  setText('.modal-sub', t('modalSub'));
+  const labels = document.querySelectorAll('.modal-field label');
+  if (labels[0]) labels[0].textContent = t('labelNombre');
+  if (labels[1]) labels[1].textContent = t('labelApellido');
+  if (labels[2]) labels[2].textContent = t('labelEmail');
+  if (labels[3]) labels[3].textContent = t('labelTel');
+  const submitBtn = document.querySelector('.modal-submit');
+  if (submitBtn && submitBtn.textContent !== t('enviando')) submitBtn.textContent = t('btnEnviar');
+  setText('#modalOk p', t('modalOkText'));
+
+  // Footer
+  const footerDiv = document.querySelector('footer > div[style]');
+  if (footerDiv) footerDiv.innerHTML = `${t('footerAddr')}<br><a href="mailto:info@residencialtorrejardin.com">info@residencialtorrejardin.com</a>`;
+
+  // Disclaimer
+  const disc = document.querySelector('.disclaimer');
+  if (disc) disc.textContent = t('disclaimerText');
+}
+
+function setText(sel, val) { const el = document.querySelector(sel); if(el) el.textContent = val; }
+function setHTML(sel, val) { const el = document.querySelector(sel); if(el) el.innerHTML = val; }
 </script>
 </body>
 </html>
