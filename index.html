@@ -3,7 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Residencial Torre Jardín · Paterna</title>
+<title>Residencial Torre Jardín | Obra Nueva en Paterna, Valencia</title>
+<meta name="description" content="Residencial Torre Jardín: promoción de obra nueva en Paterna, Valencia. 13 viviendas exclusivas (estudios, 2 dormitorios y áticos) con terraza propia, luz natural y eficiencia A+.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://residencialtorrejardin.com/">
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Residencial Torre Jardín | Obra Nueva en Paterna, Valencia">
+<meta property="og:description" content="13 viviendas exclusivas en el corazón de Paterna. Estudios, 2 dormitorios y áticos con terraza propia, luz natural y eficiencia A+.">
+<meta property="og:url" content="https://residencialtorrejardin.com/">
+<meta property="og:site_name" content="Residencial Torre Jardín">
+<meta property="og:image" content="https://residencialtorrejardin.com/fachada1.jpeg">
+<meta property="og:image:alt" content="Fachada exterior de Residencial Torre Jardín en Paterna, Valencia">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Residencial Torre Jardín | Obra Nueva en Paterna, Valencia">
+<meta name="twitter:description" content="13 viviendas exclusivas en el corazón de Paterna. Estudios, 2 dormitorios y áticos con terraza propia, luz natural y eficiencia A+.">
+<meta name="twitter:image" content="https://residencialtorrejardin.com/fachada1.jpeg">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ApartmentComplex",
+  "name": "Residencial Torre Jardín",
+  "description": "Promoción de obra nueva de 13 viviendas exclusivas en Paterna, Valencia. Estudios, viviendas de 2 dormitorios y áticos con terraza propia, luz natural y eficiencia energética A+.",
+  "url": "https://residencialtorrejardin.com/",
+  "image": "https://residencialtorrejardin.com/fachada1.jpeg",
+  "telephone": "+34678604033",
+  "email": "info@residencialtorrejardin.com",
+  "numberOfAccommodationUnits": 13,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C/ Ramón Ferrando, 5",
+    "addressLocality": "Paterna",
+    "addressRegion": "Valencia",
+    "addressCountry": "ES"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1451,6 +1500,7 @@ let currentLang = 'es';
 function toggleLang() {
   currentLang = currentLang === 'es' ? 'en' : 'es';
   document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+  document.documentElement.lang = currentLang;
   applyTranslations();
 }
 
